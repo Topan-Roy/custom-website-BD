@@ -1,0 +1,210 @@
+import React from "react";
+import { IoSearch } from "react-icons/io5";
+import { LuSettings2 } from "react-icons/lu";
+
+import { Link } from "react-router";
+import profileImg from "../../assets/IMG_8.png";
+import logo2 from "../../assets/business_center.png";
+import logo3 from "../../assets/award_star.png";
+import logo4 from "../../assets/payments.png";
+import { HiOutlineArrowLeft } from "react-icons/hi";
+
+
+export default function TutorDetails() {
+    const reviews = [
+  {
+    id: 1,
+    name: "Darrell Steward",
+    date: "12/05/25",
+    rating: 4.8,
+    total: 120,
+    img: "https://randomuser.me/api/portraits/men/32.jpg",
+    text:
+      "Ms. Sarah helped me prepare for my B math exams, I improved from a 4.0 to 6! Her techniques and practice sessions are very effective."
+  },
+  {
+    id: 2,
+    name: "Courtney Henry",
+    date: "10/11/25",
+    rating: 5.0,
+    total: 98,
+    img: "https://randomuser.me/api/portraits/women/44.jpg",
+    text:
+      "Highly professional tutor. She explains concepts clearly and provides great materials for practice."
+  },
+  {
+    id: 3,
+    name: "Wade Warren",
+    date: "01/02/26",
+    rating: 4.6,
+    total: 88,
+    img: "https://randomuser.me/api/portraits/men/75.jpg",
+    text:
+      "Amazing teaching method! My speaking skills improved a lot within a month."
+  }
+];
+  return (
+    <div className="min-h-screen bg-[#F3F7F2] p-5">
+
+      {/* 🔍 Search Bar */}
+      <div className="bg-white p-3 rounded-xl shadow-sm ">
+     
+
+        <div className="flex items-center w-[900px] mx-auto gap-3">
+            
+          <div className="flex items-center bg-[#E3E6F0] border border-[#E5E7EB]
+              px-3 h-[52px] rounded-xl w-full shadow-sm">
+            <IoSearch className="text-gray-400 text-xl mr-2" />
+            <input
+              type="text"
+              placeholder="Search by name, subject, language"
+              className="w-full bg-transparent outline-none text-[15px]"
+            />
+          </div>
+
+          <Link to="/dashboard/filtersidebar">
+            <button className="bg-[#E3E6F0] border border-[#E5E7EB]
+                h-[52px] w-[55px] rounded-xl shadow-sm flex items-center justify-center">
+              <LuSettings2 className="text-xl" />
+            </button>
+          </Link>
+        </div>
+      </div>
+
+      {/* MAIN CARD */}
+      <div className="bg-white shadow-md rounded-2xl p-8 mt-10 max-w-4xl mx-auto">
+
+        {/* Top Profile */}
+        <div className="flex items-center gap-4">
+          <img src={profileImg} className="w-14 h-14 rounded-full" />
+          <div>
+            <h2 className="text-lg font-semibold">Rokey Mahmud</h2>
+            <p className="text-gray-600">English</p>
+          </div>
+        </div>
+
+        {/* Experience - Rating - Price */}
+        <div className="grid grid-cols-3 w-96  text-center mt-10">
+        
+                      <div className="flex flex-col items-center">
+                        <img src={logo2} className="w-7 h-7 mb-1" />
+                        <p className="font-semibold text-[14px]">5 years</p>
+                        <p className="text-gray-500 text-[11px]">Experience</p>
+                      </div>
+        
+                      <div className="flex flex-col items-center border-l border-r border-gray-200 px-2">
+                        <img src={logo4} className="w-7 h-7 mb-1" />
+                        <p className="font-semibold text-[14px]">4.5</p>
+                        <p className="text-gray-500 text-[11px]">Rating</p>
+                      </div>
+        
+                      <div className="flex flex-col items-center">
+                        <img src={logo3} className="w-7 h-7 mb-1" />
+                        <p className="font-semibold text-[14px]">$45/hr</p>
+                        <p className="text-gray-500 text-[11px]">Price</p>
+                      </div>
+        
+                    </div>
+
+        {/* Description */}
+        <p className="text-gray-700 text-sm mt-6 leading-relaxed">
+          Hi! I’m an experienced English teacher specializing in grammar, spoken English,
+          and academic writing. I help students build confidence, improve fluency, and
+          understand complex topics with simple explanations. Whether you're preparing for
+          exams, enhancing communication skills, or learning English from the basics—I'm
+          here to guide you every step of the way.
+        </p>
+
+        {/* Banner Image */}
+        <div className="mt-6">
+          <img
+            src="https://images.pexels.com/photos/3184306/pexels-photo-3184306.jpeg"
+            className="w-full rounded-xl h-[270px] object-cover"
+          />
+        </div>
+
+        {/* Qualification */}
+        <h3 className="mt-8 font-semibold text-gray-800">Qualification</h3>
+        <p className="text-sm text-gray-700 mt-2">
+          Bachelor in English Language & Literature<br />
+          University of California, San Francisco<br />
+          2008
+        </p>
+
+        {/* Subject */}
+        <h3 className="mt-8 font-semibold text-gray-800">Subject</h3>
+        <div className="flex flex-wrap gap-2 mt-2">
+          {["English", "Literature", "Easy Writing", "Creative Writing"].map((item) => (
+            <span
+              key={item}
+              className="px-3 py-1 text-xs rounded-full bg-[#EBEBEB] text-[#6657E2]
+              border border-[#E3E3FF]"
+            >
+              {item}
+            </span>
+          ))}
+        </div>
+
+        {/* Language */}
+        <h3 className="mt-8 font-semibold text-gray-800">Language</h3>
+        <p className="text-sm text-gray-700 mt-2">English</p>
+
+        {/* Available Time */}
+        <h3 className="mt-8 font-semibold text-gray-800">Available time and date</h3>
+
+        <div className="mt-2 flex flex-col gap-2">
+          <span className="px-4 py-2 text-sm bg-[#EBEBEB] rounded-lg inline-block w-fit">
+            9:00am to 5:00pm
+          </span>
+
+          <span className="px-4 py-2 text-sm bg-[#EBEBEB] rounded-lg inline-block w-fit">
+            Sunday to Monday
+          </span>
+        </div>
+
+        {/* Reviews */}
+        <h3 className="mt-10 font-semibold text-gray-800">Review</h3>
+ <div className="mt-5 space-y-6">
+      {reviews.map((review) => (
+        <div key={review.id} className="flex items-start gap-3">
+          <img src={review.img} className="w-10 h-10 rounded-full" />
+
+          <div className="w-full">
+            
+            {/* Name + Date */}
+            <div className="flex items-center justify-between">
+              <h4 className="text-sm font-semibold">{review.name}</h4>
+              <p className="text-xs text-gray-500">{review.date}</p>
+            </div>
+
+            {/* Rating */}
+            <div className="flex items-center gap-1 mt-[2px]">
+              <span className="text-[#FFB800] text-sm"> ★★★★★</span>
+              {/* <span className="text-xs font-medium">{review.rating}</span>
+              <span className="text-[10px] text-gray-400">
+                ({review.total} reviews)
+              </span> */}
+            </div>
+
+            {/* Review Text */}
+            <p className="text-sm text-gray-700 mt-2 leading-relaxed">
+              {review.text}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+        
+ <button className="w-full mt-5 py-3 text-white font-medium rounded-lg 
+            bg-gradient-to-r from-[#FFC30B] via-[#8113B5] to-[#8113B5]">
+             Book Now
+            </button>
+ <button className="w-full mt-5 py-3 text-white font-medium rounded-lg 
+            bg-gradient-to-r from-[#6657E2] via-[#903CD1] to-[#903CD1]">
+             Massage
+            </button>
+      </div>
+    </div>
+  );
+}
