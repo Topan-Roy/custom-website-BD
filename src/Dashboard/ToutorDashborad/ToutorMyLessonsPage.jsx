@@ -2,7 +2,7 @@ import React from "react";
 import { FiCalendar, FiClock } from "react-icons/fi";
 import logo1 from "../../assets/IMG_8.png";
 
-export default function MyLessonsPage() {
+export default function ToutorMyLessonsPage() {
   const LessonCard = ({ img, name, subject, chapter, date, time, status }) => {
     const statusColor =
       status === "Completed"
@@ -83,7 +83,7 @@ export default function MyLessonsPage() {
 
       <div className="h-5" />
 
-     <LessonCard
+      <LessonCard
         img={logo1}
         name="Rokey Mahmud"
         subject="English"

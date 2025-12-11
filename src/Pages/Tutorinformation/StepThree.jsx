@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import logo from '../../assets/frame (2).png'
 import logo1 from '../../assets/Simplification.png'
 const StepThree = () => {
@@ -121,10 +121,11 @@ const StepThree = () => {
                     >
                         Previous
                     </button>
-
+                    <Link to='/toturdashbord'>
                     <button className="px-6 py-2 rounded-md bg-gradient-to-r from-[#614EFE] to-[#7D359F] text-white">
                         Next Step
                     </button>
+                    </Link>
                 </div>
 
             </div>

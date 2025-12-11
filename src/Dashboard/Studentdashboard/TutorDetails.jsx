@@ -203,10 +203,7 @@ export default function TutorDetails() {
                 {/* Rating */}
                 <div className="flex items-center gap-1 mt-[2px]">
                   <span className="text-[#FFB800] text-sm"> ★★★★★</span>
-                  {/* <span className="text-xs font-medium">{review.rating}</span>
-              <span className="text-[10px] text-gray-400">
-                ({review.total} reviews)
-              </span> */}
+                
                 </div>
 
                 {/* Review Text */}

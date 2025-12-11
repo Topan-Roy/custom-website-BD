@@ -24,6 +24,15 @@ import EditProfile from "../Dashboard/Studentdashboard/Editprofile";
 import TutorDetails from "../Dashboard/Studentdashboard/TutorDetails";
 import PaymentUI from "../Dashboard/Studentdashboard/PaymentUI";
 import SendMessages from "../Dashboard/Studentdashboard/SendMessages";
+import ToutorDashbord from "../Dashboard/ToutorDashborad/ToutorDashbord";
+import ToutorNotification from "../Dashboard/ToutorDashborad/ToutorNotification";
+import ToutorMyLessonsPage from "../Dashboard/ToutorDashborad/ToutorMyLessonsPage";
+import Earning from "../Dashboard/ToutorDashborad/Earning";
+import ToutorMessages from "../Dashboard/ToutorDashborad/ToutorMessages";
+import ToutorSupport from "../Dashboard/ToutorDashborad/ToutorSupport";
+import ToutorMyProfile from "../Dashboard/ToutorDashborad/ToutorMyProfile";
+import ToutorEditProfile from "../Dashboard/ToutorDashborad/ToutorEditProfile";
+import ToutorStudent from "../Dashboard/ToutorDashborad/ToutorStudent";
 
 export const router = createBrowserRouter([
   {
@@ -126,6 +135,45 @@ export const router = createBrowserRouter([
             Component:SendMessages
         },
        
+    ]
+  }
+  ,
+  {
+    path:'toturdashbord',
+    Component:ToutorDashbord,
+    children:[
+        {
+            path:'toutornotification',
+            Component:ToutorNotification
+        },
+        {
+            path:'toutormyLessonspage',
+            Component:ToutorMyLessonsPage
+        },
+        {
+            path:'earning',
+            Component:Earning
+        },
+        {
+            path:'toutormessages',
+            Component:ToutorMessages
+        },
+        {
+            path:'toutorsupport',
+            Component:ToutorSupport
+        },
+        {
+            path:'toutormyprofile',
+            Component:ToutorMyProfile
+        },
+        {
+            path:'toutoreditprofile',
+            Component:ToutorEditProfile
+        },
+        {
+            path:'toutorstudent',
+            Component:ToutorStudent
+        },
     ]
   }
 ]); 

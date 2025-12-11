@@ -10,12 +10,12 @@ import logo4 from '../../assets/Frame4.png'
 import logo5 from '../../assets/Vector.png'
 import { MdPeopleAlt } from "react-icons/md";
 
-const Studentdashboard = () => {
+const ToutorDashbord = () => {
 
     const { pathname } = useLocation();
 
 
-    const isDashboardHome = pathname === "/dashboard";
+    const isDashboardHome = pathname === "/toturdashbord";
 
     return (
         <div className="w-full min-h-screen flex ">
@@ -31,7 +31,7 @@ const Studentdashboard = () => {
 
                     <ul className="space-y-3 text-[15px]">
 
-                        <NavLink to="/dashboard" end>
+                        <NavLink to="/toturdashbord" end>
                             {({ isActive }) => (
                                 <li
                                     className={`py-2.5 px-4 rounded-lg flex items-center space-x-3 transition 
@@ -75,7 +75,7 @@ const Studentdashboard = () => {
                                 </li>
                             )}
                         </NavLink>
-                        <NavLink to="/dashboard/findtutors" end>
+                        <NavLink to="/toturdashbord/toutorstudent" end>
                             {({ isActive }) => (
                                 <li
                                     className={`py-2.5 px-4 rounded-lg flex items-center space-x-3 transition 
@@ -104,7 +104,7 @@ const Studentdashboard = () => {
                                                 : "text-white"
                                         }
                                     >
-                                        Find Tutors
+                                    Student
                                     </span>
 
                                     {/* GRADIENT DEFINITION (hidden) */}
@@ -119,7 +119,7 @@ const Studentdashboard = () => {
                                 </li>
                             )}
                         </NavLink>
-                        <NavLink to="/dashboard/myLessonspage" end>
+                        <NavLink to="/toturdashbord/toutormyLessonspage" end>
                             {({ isActive }) => (
                                 <li
                                     className={`py-2.5 px-4 rounded-lg flex items-center space-x-3 transition 
@@ -163,7 +163,7 @@ const Studentdashboard = () => {
                                 </li>
                             )}
                         </NavLink>
-                        <NavLink to="/dashboard/paymenthistory" end>
+                        <NavLink to="/toturdashbord/earning" end>
                             {({ isActive }) => (
                                 <li
                                     className={`py-2.5 px-4 rounded-lg flex items-center space-x-3 transition 
@@ -207,7 +207,7 @@ const Studentdashboard = () => {
                                 </li>
                             )}
                         </NavLink>
-                        <NavLink to="/dashboard/messages" end>
+                        <NavLink to="/toturdashbord/toutormessages" end>
                             {({ isActive }) => (
                                 <li
                                     className={`py-2.5 px-4 rounded-lg flex items-center space-x-3 transition 
@@ -251,7 +251,7 @@ const Studentdashboard = () => {
                                 </li>
                             )}
                         </NavLink>
-                        <NavLink to="/dashboard/myprofile" end>
+                        <NavLink to="/toturdashbord/toutormyprofile" end>
                             {({ isActive }) => (
                                 <li
                                     className={`py-2.5 px-4 rounded-lg flex items-center space-x-3 transition 
@@ -295,7 +295,7 @@ const Studentdashboard = () => {
                                 </li>
                             )}
                         </NavLink>
-                        <NavLink to="/dashboard/support" end>
+                        <NavLink to="/toturdashbord/toutorsupport" end>
                             {({ isActive }) => (
                                 <li
                                     className={`py-2.5 px-4 rounded-lg flex items-center space-x-3 transition 
@@ -370,7 +370,7 @@ const Studentdashboard = () => {
                         </div>
 
                         <div className="flex items-center space-x-5">
-                            <NavLink to="/dashboard/notification">
+                            <NavLink to="/toturdashbord/ToutorNotification">
                                 <div className="relative cursor-pointer">
                                     <button className="bg-[#EBEBEB] p-2.5 rounded-full text-lg shadow-sm">
                                         🔔
@@ -388,7 +388,7 @@ const Studentdashboard = () => {
 
 
                             <div className="flex items-center space-x-2">
-                                <Link to='/dashboard/myprofile'>
+                                <Link to='/toturdashbord/toutormyprofile'>
                                 <img src={logo1} alt="user" className="w-9 h-9 rounded-full border" />
                                 <span className="font-medium text-[14px] text-[#585858]">Rokey</span>
                                 </Link>
@@ -456,31 +456,7 @@ const Studentdashboard = () => {
 
                         </div>
 
-                        {/* ============ LEARNING PROGRESS ============ */}
-                        <div className="bg-white rounded-2xl shadow-sm  p-7 mt-7 mb-10">
-                            <h3 className="font-semibold text-[#6657E2] text-[17px] mb-5">Learning Progress</h3>
-
-                            <div className="flex justify-between items-center mb-2 text-[14px] font-medium">
-                                <p className="text-[#585858]">Lessons Completed</p>
-                                <span className="text-[#585858]">1 / 2</span>
-                            </div>
-
-                            <div className="w-full h-2 bg-gray-200 rounded-full mb-8">
-                                <div className="h-full bg-purple-500 w-1/2 rounded-full"></div>
-                            </div>
-
-                            <div className="grid grid-cols-2 gap-5">
-                                <div className="bg-gray-100 p-5 rounded-xl">
-                                    <p className="text-[#585858] text-[14px]">Total Hours</p>
-                                    <h2 className="text-[22px] text-[#2563EB] font-semibold mt-1">3h</h2>
-                                </div>
-
-                                <div className="bg-gray-100 p-5 rounded-xl">
-                                    <p className="text-[#585858] text-[14px]">Avg. Rating</p>
-                                    <h2 className="text-[22px] text-[#6657E2] font-semibold mt-1">4.5 ⭐</h2>
-                                </div>
-                            </div>
-                        </div>
+                       
                     </>
                 )}
 
@@ -492,4 +468,4 @@ const Studentdashboard = () => {
     );
 };
 
-export default Studentdashboard;
+export default ToutorDashbord;

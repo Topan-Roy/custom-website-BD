@@ -5,7 +5,7 @@ import logo from "../../assets/Rectangle 923.png";
 
 export default function EditProfile() {
   return (
-    <div className="bg-[#F3F7F2] min-h-screen">
+    <div className=" min-h-screen">
 
       {/* TITLE */}
       <h2 className="text-[#6657E2] text-2xl font-semibold mb-1">Edit profile</h2>
@@ -39,7 +39,7 @@ export default function EditProfile() {
         </div>
 
         {/* RIGHT FORM */}
-        <div className="flex-1 bg-white p-5 rounded-xl shadow">
+        <div className="flex-1  p-5 rounded-xl shadow">
 
           <div className="grid grid-cols-1 gap-6 w-full">
 
