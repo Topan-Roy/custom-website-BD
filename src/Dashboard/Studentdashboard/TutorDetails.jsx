@@ -52,7 +52,7 @@ export default function TutorDetails() {
 
         <div className="flex items-center w-[900px] mx-auto gap-3">
 
-          <div className="flex items-center bg-[#E3E6F0] border border-[#E5E7EB]
+          <div className="flex items-center bg-[#EBEBEB] border border-[#E5E7EB]
               px-3 h-[52px] rounded-xl w-full shadow-sm">
             <IoSearch className="text-gray-400 text-xl mr-2" />
             <input
@@ -63,7 +63,7 @@ export default function TutorDetails() {
           </div>
 
           <Link to="/dashboard/filtersidebar">
-            <button className="bg-[#E3E6F0] border border-[#E5E7EB]
+            <button className="bg-[#EBEBEB] border border-[#E5E7EB]
                 h-[52px] w-[55px] rounded-xl shadow-sm flex items-center justify-center">
               <LuSettings2 className="text-xl" />
             </button>

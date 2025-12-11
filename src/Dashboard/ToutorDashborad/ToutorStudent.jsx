@@ -114,12 +114,12 @@ const ToutorStudent = () => {
       <p className="text-[#7C7C7C] mt-3 text-sm mb-2">Interested Subjects</p>
 
       {/* Interested Subjects badges — perfect wrapping */}
-  <div className="flex flex-wrap gap-2 max-h-[60px] overflow-hidden">
+  <div className="flex flex-wrap gap-2 max-h-[70px] overflow-hidden">
   {["English", "Literature", "Easy Writing", "Creative Writing"].map((sub) => (
     <span
       key={sub}
-      className="px-3 py-1 text-sm rounded-full bg-[#EBEBEB] border border-[#E3E3FF]
-      bg-clip-text text-transparent [background-image:linear-gradient(90deg,#6657E2,#903CD1)]
+      className="px-5 py-1  text-sm rounded-full bg-[#EBEBEB] border border-[#E3E3FF]
+      bg-clip-text text-transparent font-medium [background-image:linear-gradient(90deg,#6657E2,#903CD1)]
       whitespace-normal">
       {sub}
     </span>
@@ -130,7 +130,7 @@ const ToutorStudent = () => {
 
 
       {/* Button */}
-      <Link to="/dashboard/tutordetails">
+      <Link to="/toturdashbord/toutorsendmessagest">
         <button
           className="w-full mt-5 py-3 text-white font-medium rounded-lg 
           bg-gradient-to-r from-[#6657E2] via-[#903CD1] to-[#903CD1]"

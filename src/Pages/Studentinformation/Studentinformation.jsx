@@ -89,12 +89,19 @@ const Studentinformation = () => {
               "Music", "Foreign Languages", "Special Education",
               "Social Studies", "Business Studies", "Religious Studies"
             ].map((subject, index) => (
-              <label key={index} className="flex items-center gap-2 text-[#101010] ">
-                <input type="checkbox" className="w-4 h-4 text-[#101010]" />
+              <label
+                key={index}
+                className="flex items-center gap-2 text-[#101010]  cursor-pointer"
+              >
+                <input
+                  type="checkbox"
+                  className="w-4 h-4 accent-[#6657E2] cursor-pointer"
+                />
                 {subject}
               </label>
             ))}
           </div>
+
         </div>
 
         <Link to="/dashboard">

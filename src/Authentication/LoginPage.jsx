@@ -16,7 +16,7 @@ const LoginPage = () => {
           <p className="text-sm text-[#585858] mt-3">
             Don't have an account?{' '}
             <a
-              href="/register"
+              href="/selectrole"
               className="bg-gradient-to-r from-[#614EFE] to-[#7D359F] bg-clip-text text-transparent font-medium"
             >
               Register

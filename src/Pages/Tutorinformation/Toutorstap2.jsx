@@ -55,17 +55,24 @@ const Toutorstap2 = () => {
     </label>
 
     <div className="grid grid-cols-2 sm:grid-cols-3 gap-y-3 mt-4 text-sm text-gray-700">
-      {[
-        "English","Science","Geography","Biology","Music","Social Studies",
-        "Mathematics","History","Chemistry","Art","Foreign Languages","Business Studies",
-        "Physics","Computer Science","Physical Education","Economics","Special Education","Religious Studies"
-      ].map((sub, index) => (
-        <label key={index} className="flex items-center gap-2 text-[#101010]">
-          <input type="checkbox" className="w-4 h-4 text-[#101010]" />
-          {sub}
-        </label>
-      ))}
-    </div>
+  {[
+    "English", "Science", "Geography", "Biology", "Music", "Social Studies",
+    "Mathematics", "History", "Chemistry", "Art", "Foreign Languages", "Business Studies",
+    "Physics", "Computer Science", "Physical Education", "Economics", "Special Education", "Religious Studies"
+  ].map((sub, index) => (
+    <label
+      key={index}
+      className="flex items-center gap-2 text-[#101010]  cursor-pointer"
+    >
+      <input
+        type="checkbox"
+        className="w-4 h-4 accent-[#6657E2] cursor-pointer"
+      />
+      {sub}
+    </label>
+  ))}
+</div>
+
   </div>
 
  

@@ -33,6 +33,7 @@ import ToutorSupport from "../Dashboard/ToutorDashborad/ToutorSupport";
 import ToutorMyProfile from "../Dashboard/ToutorDashborad/ToutorMyProfile";
 import ToutorEditProfile from "../Dashboard/ToutorDashborad/ToutorEditProfile";
 import ToutorStudent from "../Dashboard/ToutorDashborad/ToutorStudent";
+import ToutorSendMessages from "../Dashboard/ToutorDashborad/ToutorSendMessages";
 
 export const router = createBrowserRouter([
   {
@@ -173,6 +174,10 @@ export const router = createBrowserRouter([
         {
             path:'toutorstudent',
             Component:ToutorStudent
+        },
+        {
+            path:'toutorsendmessagest',
+            Component:ToutorSendMessages
         },
     ]
   }

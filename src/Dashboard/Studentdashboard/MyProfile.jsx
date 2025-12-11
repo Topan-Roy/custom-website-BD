@@ -49,7 +49,7 @@ export default function MyProfile() {
                             {["English", "Literature", "Easy Writing", "Creative Writing"].map((item) => (
                                 <span
                                     key={item}
-                                    className="px-3 py-1 text-xs rounded-full bg-[#EBEBEB] border border-[#E3E3FF]
+                                    className="px-3 py-1 font-medium text-xs rounded-full bg-[#EBEBEB] border border-[#E3E3FF]
                  bg-gradient-to-r from-[#6657E2] to-[#903CD1] text-transparent bg-clip-text"
                                 >
                                     {item}

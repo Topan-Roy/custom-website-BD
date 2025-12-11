@@ -23,7 +23,7 @@ export default function Earning() {
         <div className="  min-h-screen">
             {/* Header */}
             <h2 className="text-[#6657E2] font-semibold text-xl mb-1">
-                Earning
+                Earnings
             </h2>
             <p className="text-gray-500 text-sm mb-6">
                 Track your earnings, view transaction history, and manage withdrawals.

@@ -110,7 +110,7 @@ const FindTutors = () => {
         <div className="flex flex-col sm:flex-row items-center gap-3">
 
           <div className="
-      flex items-center bg-[#E3E6F0] border border-[#E5E7EB]
+      flex items-center bg-[#EBEBEB] border border-[#E5E7EB]
       px-3 h-[52px] rounded-xl w-full sm:max-w-[600px] shadow-sm
     ">
             <span className="text-gray-400 text-xl mr-3">
@@ -126,7 +126,7 @@ const FindTutors = () => {
 
           <Link to="/dashboard/filtersidebar">
             <button className="
-      bg-[#E3E6F0] border border-[#E5E7EB]
+      bg-[#EBEBEB] border border-[#E5E7EB]
       h-[52px] w-full sm:w-[55px] rounded-xl shadow-sm
       flex items-center justify-center
     ">
