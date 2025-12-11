@@ -22,6 +22,8 @@ import Support from "../Dashboard/Studentdashboard/Support";
 import MyProfile from "../Dashboard/Studentdashboard/MyProfile";
 import EditProfile from "../Dashboard/Studentdashboard/Editprofile";
 import TutorDetails from "../Dashboard/Studentdashboard/TutorDetails";
+import PaymentUI from "../Dashboard/Studentdashboard/PaymentUI";
+import SendMessages from "../Dashboard/Studentdashboard/SendMessages";
 
 export const router = createBrowserRouter([
   {
@@ -115,6 +117,15 @@ export const router = createBrowserRouter([
             path:'tutordetails',
             Component:TutorDetails
         },
+        {
+            path:'paymentul',
+            Component:PaymentUI
+        },
+        {
+            path:'sendmessages',
+            Component:SendMessages
+        },
+       
     ]
   }
 ]); 
