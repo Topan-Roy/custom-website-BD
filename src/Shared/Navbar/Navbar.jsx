@@ -52,7 +52,7 @@ const Navbar = () => {
           </button>
 
         </Link>
-        <Link to="/selectrole">
+        <Link to="/signup">
           <button className="bg-gradient-to-r from-[#6657E2] via-[#8113B5] to-[#903CD1] text-[#FFFFFF] px-4 py-2 rounded-2xl ">
             Sign Up
           </button>

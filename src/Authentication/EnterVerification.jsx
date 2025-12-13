@@ -1,7 +1,22 @@
 import React from "react";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 
 const EnterVerification = () => {
+    const navigate = useNavigate();
+    const { state } = useLocation();
+
+    // ✅ role SignUp page থেকে আসবে
+    const role = state?.role || "student";
+
+    const handleVerify = () => {
+        // ✅ role অনুযায়ী redirect
+        if (role === "student") {
+            navigate("/studentinformation");
+        } else {
+            navigate("/tutorinformation");
+        }
+    };
+
     return (
         <div className="w-full min-h-screen flex items-center justify-center bg-[#F4F8F5]">
             <div className="bg-white rounded-2xl w-full max-w-lg px-16 py-50 shadow-xl">
@@ -25,13 +40,18 @@ const EnterVerification = () => {
                     ))}
                 </div>
 
-                <p className="text-sm text-center text-gray-600 mt-3 cursor-pointer">Paste Code</p>
+                <p className="text-sm text-center text-gray-600 mt-3 cursor-pointer">
+                    Paste Code
+                </p>
 
-                <Link to="/setpassword">
-                    <button className="w-full mt-10 bg-gradient-to-r from-[#6657E2] to-[#903CD1] text-white py-3 rounded-full text-base font-medium shadow-sm">
-                        Verify Code
-                    </button>
-                </Link>
+                {/* ✅ এখানে Link বাদ, button click এ redirect */}
+                <button
+                    onClick={handleVerify}
+                    className="w-full mt-10 bg-gradient-to-r from-[#6657E2] to-[#903CD1] 
+                               text-white py-3 rounded-full text-base font-medium shadow-sm"
+                >
+                    Verify Code
+                </button>
 
                 <p className="text-center text-sm text-gray-600 mt-6">
                     Didn’t receive the code?{" "}
@@ -40,7 +60,6 @@ const EnterVerification = () => {
                     </button>
                 </p>
 
-                {/* ✅ Back to Login (fixed version) */}
                 <p className="text-center text-sm text-gray-700 mt-5">
                     <Link
                         to="/login"

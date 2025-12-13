@@ -34,6 +34,7 @@ import ToutorMyProfile from "../Dashboard/ToutorDashborad/ToutorMyProfile";
 import ToutorEditProfile from "../Dashboard/ToutorDashborad/ToutorEditProfile";
 import ToutorStudent from "../Dashboard/ToutorDashborad/ToutorStudent";
 import ToutorSendMessages from "../Dashboard/ToutorDashborad/ToutorSendMessages";
+import SignUp from "../Authentication/SignUp";
 
 export const router = createBrowserRouter([
   {
@@ -47,6 +48,10 @@ export const router = createBrowserRouter([
     {
         path:'login',
         Component:LoginPage
+    },
+    {
+        path:'signup',
+        Component:SignUp
     },
     {
         path:'selectrole',
