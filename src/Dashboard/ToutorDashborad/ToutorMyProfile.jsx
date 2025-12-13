@@ -1,5 +1,6 @@
 import { FiChevronDown } from "react-icons/fi";
-import profilePic from "../../assets/Banner.png";
+import profilePic from "../../assets/IMG_8.png";
+import profilePic1 from "../../assets/banner.png";
 import logo from "../../assets/Rectangle 923.png";
 import { FaRegEdit } from "react-icons/fa";
 import { Link } from "react-router";
@@ -8,7 +9,7 @@ export default function TutorMyProfile() {
     return (
         <div className="bg-[#F3F7F2] min-h-screen">
 
-            {/* TITLE */}
+      
             <h2 className="text-[#6657E2] text-2xl font-semibold mb-1">My Profile</h2>
             <p className="text-gray-500 mb-8">
                 Manage your personal information and learning preferences.
@@ -16,7 +17,6 @@ export default function TutorMyProfile() {
 
             <div className="flex gap-8">
 
-                {/* LEFT CARD */}
                 <div className="w-64">
                     <div className="bg-white rounded-xl shadow p-6 text-center">
                         <img
@@ -153,7 +153,7 @@ export default function TutorMyProfile() {
                         <div className="w-full bg-white p-5 rounded-lg shadow mt-10 ">
                             <div className="w-[160px] h-[120px]">
                                 <img
-                                    src={profilePic}
+                                    src={profilePic1}
                                     className="w-52 h-30 rounded-2xl object-cover  shadow-lg"
                                 />
                             </div>

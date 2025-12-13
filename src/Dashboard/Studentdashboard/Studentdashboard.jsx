@@ -9,13 +9,55 @@ import logo3 from '../../assets/Frame3.png'
 import logo4 from '../../assets/Frame4.png'
 import logo5 from '../../assets/Vector.png'
 import { MdPeopleAlt } from "react-icons/md";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Studentdashboard = () => {
+
+
+    const [dashboardData, setDashboardData] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+
+    const token = localStorage.getItem("token");
 
     const { pathname } = useLocation();
 
 
     const isDashboardHome = pathname === "/dashboard";
+
+    useEffect(() => {
+        const fetchDashboard = async () => {
+            try {
+                const token = localStorage.getItem("token");
+
+                const res = await axios.get(
+                    "https://abilities-wav-behind-outdoors.trycloudflare.com/api/v1/dashboard/student",
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                );
+
+                console.log("DASHBOARD:", res.data);
+
+                // 🔴 IMPORTANT
+                setDashboardData(res.data.response.data);
+
+            } catch (error) {
+                console.log("DASHBOARD ERROR:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchDashboard();
+    }, []);
+
+    // if (loading) {
+    //   return <div className="p-10">Loading dashboard...</div>;
+    // }
 
     return (
         <div className="w-full min-h-screen flex ">
@@ -341,7 +383,7 @@ const Studentdashboard = () => {
                         </NavLink>
 
 
-                        
+
 
                         <NavLink to="/logout" className="block pt-4">
                             <li className="text-red-300 hover:bg-white/10 py-2.5 px-4 rounded-lg flex items-center space-x-3">
@@ -389,8 +431,8 @@ const Studentdashboard = () => {
 
                             <div className="flex items-center space-x-2">
                                 <Link to='/dashboard/myprofile'>
-                                <img src={logo1} alt="user" className="w-9 h-9 rounded-full border" />
-                                <span className="font-medium text-[14px] text-[#585858]">Rokey</span>
+                                    <img src={logo1} alt="user" className="w-9 h-9 rounded-full border" />
+                                    <span className="font-medium text-[14px] text-[#585858]">Rokey</span>
                                 </Link>
                             </div>
                         </div>
@@ -404,25 +446,36 @@ const Studentdashboard = () => {
                             <div className="bg-white p-7 rounded-2xl shadow-sm flex flex-col items-center">
                                 <img src={logo2} alt="" className="mb-3" />
                                 <p className="text-[#7C7C7C] text-[14px]">Upcoming Lesson</p>
-                                <h2 className="text-[28px] text-[#585858] font-semibold mt-2">0</h2>
+                                <h2 className="text-[28px] font-semibold">
+                                    {dashboardData?.upcomingLesson}
+                                </h2>
+
+
                             </div>
 
                             <div className="bg-white p-7 rounded-2xl shadow-sm flex flex-col items-center">
                                 <img src={logo3} alt="" className="mb-3" />
                                 <p className="text-[#7C7C7C] text-[14px]">Completed Lesson</p>
-                                <h2 className="text-[28px] text-[#585858] font-semibold mt-2">1</h2>
+                                <h2 className="text-[28px] font-semibold">
+                                    {dashboardData?.completedLesson}
+                                </h2>
+
                             </div>
 
                             <div className="bg-white p-7 rounded-2xl shadow-sm flex flex-col items-center">
                                 <img src={logo4} alt="" className="mb-3" />
                                 <p className="text-[#7C7C7C] text-[14px]">Total Spent</p>
-                                <h2 className="text-[28px] text-[#585858] font-semibold mt-2">$90.00</h2>
+                                <h2 className="text-[28px] font-semibold">
+                                    ${dashboardData?.totalEarnings}
+                                </h2>
                             </div>
 
                             <div className="bg-white p-7 rounded-2xl shadow-sm flex flex-col items-center">
                                 <img src={logo4} alt="" className="mb-3" />
                                 <p className="text-[#7C7C7C] text-[14px]">Reviews Given</p>
-                                <h2 className="text-[28px] text-[#585858] font-semibold mt-2">1</h2>
+                                <h2 className="text-[28px] font-semibold">
+                                    {dashboardData?.totalLesson}
+                                </h2>
                             </div>
                         </div>
 
@@ -433,12 +486,21 @@ const Studentdashboard = () => {
                                 <h3 className="font-semibold text-[#6657E2] text-[17px] flex items-center gap-2">
                                     <img src={logo2} alt="" className="w-5 h-5" />
                                     Upcoming Lessons
+                                    <span className="ml-2 text-xs px-2 py-0.5 rounded-full bg-[#6657E2]/10 text-[#6657E2]">
+                                        {dashboardData?.upcomingLesson}
+                                    </span>
                                 </h3>
 
-                                {/* <button className="text-[#6657E2] border p-2 rounded-xl text-sm font-medium">
-                                    View All
-                                </button> */}
+                                {dashboardData?.upcomingLesson > 0 && (
+                                    <Link
+                                        to="/dashboard/myLessonspage"
+                                        className="text-[#6657E2] border border-[#6657E2] px-3 py-1 rounded-xl text-sm font-medium hover:bg-[#6657E2] hover:text-white transition"
+                                    >
+                                        View All
+                                    </Link>
+                                )}
                             </div>
+
 
 
                             <div className="w-full py-14 text-gray-400 flex flex-col justify-center items-center">
@@ -456,31 +518,51 @@ const Studentdashboard = () => {
 
                         </div>
 
-                        {/* ============ LEARNING PROGRESS ============ */}
-                        <div className="bg-white rounded-2xl shadow-sm  p-7 mt-7 mb-10">
-                            <h3 className="font-semibold text-[#6657E2] text-[17px] mb-5">Learning Progress</h3>
+                        {/* ============LEARNING PROGRES S ============ */}
+                        <div className="bg-white rounded-2xl shadow-sm p-7 mt-7 mb-10">
+                            <h3 className="font-semibold text-[#6657E2] text-[17px] mb-5">
+                                Learning Progress
+                            </h3>
 
+                            {/* Lessons completed */}
                             <div className="flex justify-between items-center mb-2 text-[14px] font-medium">
                                 <p className="text-[#585858]">Lessons Completed</p>
-                                <span className="text-[#585858]">1 / 2</span>
+                                <span className="text-[#585858]">
+                                    {dashboardData?.completedLesson} / {dashboardData?.totalLesson}
+                                </span>
                             </div>
 
+                            {/* Progress bar */}
                             <div className="w-full h-2 bg-gray-200 rounded-full mb-8">
-                                <div className="h-full bg-purple-500 w-1/2 rounded-full"></div>
+                                <div
+                                    className="h-full bg-purple-500 rounded-full transition-all duration-500"
+                                    style={{
+                                        width:
+                                            dashboardData?.totalLesson > 0
+                                                ? `${(dashboardData.completedLesson / dashboardData.totalLesson) * 100}%`
+                                                : "0%",
+                                    }}
+                                ></div>
                             </div>
 
+                            {/* Stats */}
                             <div className="grid grid-cols-2 gap-5">
                                 <div className="bg-gray-100 p-5 rounded-xl">
                                     <p className="text-[#585858] text-[14px]">Total Hours</p>
-                                    <h2 className="text-[22px] text-[#2563EB] font-semibold mt-1">3h</h2>
+                                    <h2 className="text-[22px] text-[#2563EB] font-semibold mt-1">
+                                        {dashboardData?.totalHours}h
+                                    </h2>
                                 </div>
 
                                 <div className="bg-gray-100 p-5 rounded-xl">
-                                    <p className="text-[#585858] text-[14px]">Avg. Rating</p>
-                                    <h2 className="text-[22px] text-[#6657E2] font-semibold mt-1">4.5 ⭐</h2>
+                                    <p className="text-[#585858] text-[14px]">Total Lessons</p>
+                                    <h2 className="text-[22px] text-[#6657E2] font-semibold mt-1">
+                                        {dashboardData?.totalLesson}
+                                    </h2>
                                 </div>
                             </div>
                         </div>
+
                     </>
                 )}
 

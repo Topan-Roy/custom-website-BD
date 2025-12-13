@@ -2,41 +2,41 @@ import React from 'react';
 import { Link } from 'react-router';
 
 const Tutorinformation = () => {
-    return (
-        <div className="w-full min-h-screen  flex items-center justify-center py-12">
+  return (
+    <div className="w-full min-h-screen  flex items-center justify-center py-12">
       <div className="bg-white w-[750px] px-12 py-10 rounded-xl shadow-sm">
 
-   <div className="w-full mb-8">
+        <div className="w-full mb-8">
 
-  <div className="flex justify-between items-start gap-5">
-
- 
-    <div className="flex flex-col items-start w-1/3">
-      <div className="w-full h-[3px] bg-[#6657E2] mb-2 rounded-full"></div>
-      <span className="text-[#6657E2] text-md ">Step 1</span>
-      <span className="text-[#6657E2] text-1xl font-semibold">Personal Information</span>
-    </div>
+          <div className="flex justify-between items-start gap-5">
 
 
-    <div className="flex flex-col items-start w-1/3">
-      <div className="w-full h-[3px] bg-[#585858] mb-2"></div>
-      <span className="text-[#585858]">Step 2</span>
-      <span className="text-[#585858] text-1xl font-semibold">Qualifications</span>
-    </div>
+            <div className="flex flex-col items-start w-1/3">
+              <div className="w-full h-[3px] bg-[#6657E2] mb-2 rounded-full"></div>
+              <span className="text-[#6657E2] text-md ">Step 1</span>
+              <span className="text-[#6657E2] text-1xl font-semibold">Personal Information</span>
+            </div>
 
 
-    <div className="flex flex-col items-start w-1/3">
-      <div className="w-full h-[3px] bg-[#585858] mb-2"></div>
-      <span className="text-[#585858]">Step 3</span>
-      <span className="text-[#585858] ttext-1xl font-semibold">Set price and Verification</span>
-    </div>
-
-  </div>
-
-</div>
+            <div className="flex flex-col items-start w-1/3">
+              <div className="w-full h-[3px] bg-[#585858] mb-2"></div>
+              <span className="text-[#585858]">Step 2</span>
+              <span className="text-[#585858] text-1xl font-semibold">Qualifications</span>
+            </div>
 
 
-        
+            <div className="flex flex-col items-start w-1/3">
+              <div className="w-full h-[3px] bg-[#585858] mb-2"></div>
+              <span className="text-[#585858]">Step 3</span>
+              <span className="text-[#585858] ttext-1xl font-semibold">Set price and Verification</span>
+            </div>
+
+          </div>
+
+        </div>
+
+
+
         <h1 className="text-2xl font-semibold bg-gradient-to-r from-[#614EFE] to-[#7D359F] bg-clip-text text-transparent">
           Personal Information
         </h1>
@@ -44,7 +44,7 @@ const Tutorinformation = () => {
           Please provide your basic personal information to begin the verification process.
         </p>
 
-  
+
         <div className="mt-6">
           <label className="text-1xl font-semibold bg-gradient-to-r from-[#614EFE] to-[#7D359F] bg-clip-text text-transparent">Profile Picture*</label>
 
@@ -58,7 +58,7 @@ const Tutorinformation = () => {
           </p>
         </div>
 
-       
+
         <div className="mt-6">
           <label className="text-1xl font-semibold bg-gradient-to-r from-[#614EFE] to-[#7D359F] bg-clip-text text-transparent">
             Full Name <span className="text-red-500">*</span>
@@ -81,7 +81,7 @@ const Tutorinformation = () => {
           />
         </div>
 
-     
+
         <div className="mt-6">
           <label className="text-1xl font-semibold bg-gradient-to-r from-[#614EFE] to-[#7D359F] bg-clip-text text-transparent">Bio</label>
           <textarea
@@ -91,18 +91,18 @@ const Tutorinformation = () => {
         </div>
 
         <div className="flex justify-end mt-8">
-            <Link to="/toutorstap2">
-          <button
-            className="bg-gradient-to-r from-[#6657E2] via-[#8113B5] to-[#903CD1] text-[#FFFFFF] px-4 py-2 rounded-2xl"
-          >
-            Next Step
-          </button>
-           </Link>
+          <Link to="/toutorstap2">
+            <button
+              className="bg-gradient-to-r from-[#6657E2] via-[#8113B5] to-[#903CD1] text-[#FFFFFF] px-4 py-2 rounded-2xl"
+            >
+              Next Step
+            </button>
+          </Link>
         </div>
 
       </div>
     </div>
-    );
+  );
 };
 
 export default Tutorinformation;

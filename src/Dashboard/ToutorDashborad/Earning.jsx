@@ -21,7 +21,7 @@ export default function Earning() {
 
     return (
         <div className="  min-h-screen">
-            {/* Header */}
+           
             <h2 className="text-[#6657E2] font-semibold text-xl mb-1">
                 Earnings
             </h2>
@@ -34,38 +34,37 @@ export default function Earning() {
                     Set up wallet
                 </button>
             </div>
-            {/* Summary Cards */}
+           
             <div className="flex gap-6 mb-8">
-                {/* Pending */}
+               
                 <div className="flex-1 bg-white rounded-lg p-5 shadow-sm flex flex-col items-center gap-2">
                     <div className="p-2 rounded-md bg-purple-100">
-                        {/* calendar icon */}
+                     
                         <img src={logo} alt="" />
                     </div>
                     <p className="text-gray-500 text-md">Pending</p>
                     <p className="text-xl text-[#585858] font-bold">0</p>
                 </div>
 
-                {/* Total Spent */}
                 <div className="flex-1 bg-white rounded-lg p-5 shadow-sm flex flex-col items-center gap-2 relative">
                     <div className="p-2 rounded-md bg-purple-100">
-                        {/* credit card icon */}
+                        
                         <img src={logo1} alt="" />
                     </div>
                     <p className="text-gray-500 text-md">Total Spent</p>
                     <p className="text-xl text-[#585858] font-bold">$90.00</p>
 
-                    {/* small overlapping avatar circle */}
+                   
                     <div className="absolute -top-2 -right-3 flex -space-x-2">
 
 
                     </div>
                 </div>
 
-                {/* Completed */}
+               
                 <div className="flex-1 bg-white rounded-lg p-5 shadow-sm flex flex-col items-center gap-2">
                     <div className="p-2 rounded-md bg-purple-100">
-                        {/* credit card icon */}
+                     
                         <img src={logo1} alt="" />
                     </div>
                     <p className="text-gray-500 text-md">Completed</p>
@@ -75,7 +74,7 @@ export default function Earning() {
 
 
 
-            {/* Transaction History */}
+          
             <div className="bg-[#FFFFFF] rounded-lg p-5 space-y-4">
                 <div className="  border border-gray-200 rounded-md p-4  items-center justify-between mb-3">
                     <h1 className="text-[#6657E2] font-semibold text-xl">Set up Your wallet</h1>
@@ -93,7 +92,7 @@ export default function Earning() {
                     >
                         <div className="flex items-center gap-3">
                             <div className="p-2 rounded-md bg-purple-100">
-                                {/* credit card icon */}
+                               
                                 <img src={logo1} alt="" />
                             </div>
                             <div>
