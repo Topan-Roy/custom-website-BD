@@ -5,11 +5,11 @@ const EnterVerification = () => {
     const navigate = useNavigate();
     const { state } = useLocation();
 
-    // ✅ role SignUp page থেকে আসবে
+    
     const role = state?.role || "student";
 
     const handleVerify = () => {
-        // ✅ role অনুযায়ী redirect
+       
         if (role === "student") {
             navigate("/studentinformation");
         } else {
