@@ -116,4 +116,4 @@ const Studentinformation = () => {
   );
 };
 
-export default Studentinformation;
+export default Studentinformation;//
