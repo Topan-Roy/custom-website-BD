@@ -16,7 +16,7 @@ import api from "../../services/api";
 const ToutorDashbord = () => {
 
     const { pathname } = useLocation();
-    const { logOut } = useAuth();
+    const { logOut, user } = useAuth();
 
     const isDashboardHome = pathname === "/toturdashbord";
 
@@ -67,12 +67,12 @@ const ToutorDashbord = () => {
         <div className="w-full min-h-screen flex ">
 
             {/* ================= SIDEBAR ================= */}
-            <div className="px-10 py-5">
-                <div className="w-[290px]  h-[880px] bg-gradient-to-r from-[#6657E2] to-[#903CD1] text-white px-6 py-8 rounded-2xl">
+            <div className="px-10 py-5 min-h-screen">
+                <div className="w-[290px] h-full bg-gradient-to-r from-[#6657E2] to-[#903CD1] text-white px-6 py-8 rounded-2xl">
 
                     {/* Logo Center */}
                     <div className="flex justify-center mb-2">
-                        <img src={logo} alt="logo" className="w-[80px]" />
+                        <img src={logo} alt="logo" className="w-20" />
                     </div>
 
                     <ul className="space-y-3 text-[15px]">
@@ -386,7 +386,7 @@ const ToutorDashbord = () => {
                             )}
                         </NavLink>
 
-                        <li onClick={handleLogout} className="text-red-300 hover:bg-white/10 py-2.5 px-4 rounded-lg flex items-center space-x-3">
+                        <li onClick={handleLogout} className="text-red-300 cursor-pointer hover:bg-white/10 py-2.5 px-4 rounded-lg flex items-center space-x-3">
                             <FiLogOut size={18} /> <span>Log Out</span>
                         </li>
 
@@ -397,14 +397,14 @@ const ToutorDashbord = () => {
 
 
             {/* ================= MAIN CONTENT ================= */}
-            <div className="flex-1 p-8">
+            <div className="w-full py-5 pr-5">
 
                 {/* TOPBAR always visible */}
-                <div className="">
+                <div>
                     <div className="w-full bg-[#FFFFFF] shadow-md py-3 px-6 flex justify-between items-center rounded-2xl mb-6">
                         <div>
                             <h2 className="text-[20px] font-semibold bg-gradient-to-r from-[#FFC30B] via-[#8113B5] to-[#8113B5] text-transparent bg-clip-text">
-                                Welcome Back Rokey!
+                                Welcome Back {user.name}
                             </h2>
 
                             <p className="text-[#606060] text-[13px]">Here's an overview of your learning journey.</p>
@@ -430,8 +430,8 @@ const ToutorDashbord = () => {
 
                             <div className="flex items-center space-x-2">
                                 <Link to='/toturdashbord/toutormyprofile'>
-                                    <img src={logo1} alt="user" className="w-9 h-9 rounded-full border" />
-                                    <span className="font-medium text-[14px] text-[#585858]">Rokey</span>
+                                    <img src={user.avatar} alt="user" className="w-9 h-9 rounded-full border" />
+                                    <span className="font-medium text-[14px] text-[#585858]">{user.name}</span>
                                 </Link>
                             </div>
                         </div>

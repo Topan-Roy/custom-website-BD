@@ -9,7 +9,7 @@ export default function ToutorMessages() {
         {
             name: "Rokey Mahmud",
             subject: "English",
-            avatar:logo1,
+            avatar: logo1,
             online: true,
             messages: [
                 {
@@ -147,15 +147,15 @@ export default function ToutorMessages() {
 
                     {/* Input Box */}
                     <div className="mt-6 flex items-center justify-center">
-                        <div className="relative w-full max-w-4xl"> {/* WIDTH BIGGER */}
+                        <div className="relative w-full flex gap-4"> {/* WIDTH BIGGER */}
 
                             {/* Plus Icon (Left Outside) */}
-                            <button className="absolute -left-10 top-1/2 -translate-y-1/2 bg-white shadow-md w-10 h-10 rounded-full flex items-center justify-center text-purple-600 text-2xl font-bold">
+                            <button className="bg-white shadow-md w-10 h-10 rounded-full flex items-center justify-center text-purple-600 text-2xl font-bold">
                                 +
                             </button>
 
                             {/* Input Box */}
-                            <div className="border border-gray-300 rounded-full pl-6 pr-6 py-3 flex items-center bg-white">
+                            <div className="border w-full border-gray-300 rounded-full pl-6 pr-6 py-3 flex items-center bg-white">
                                 <input
                                     type="text"
                                     placeholder="Type a message..."
@@ -164,7 +164,7 @@ export default function ToutorMessages() {
                             </div>
 
                             {/* Send Icon (Right Outside) */}
-                            <button className="absolute -right-10 top-1/2 -translate-y-1/2 bg-white shadow-md w-10 h-10 rounded-full flex items-center justify-center text-purple-600 text-xl">
+                            <button className="bg-white cursor-pointer shadow-md w-10 h-10 rounded-full flex items-center justify-center text-purple-600 text-xl">
                                 <img src={logo} alt="" />
                             </button>
 

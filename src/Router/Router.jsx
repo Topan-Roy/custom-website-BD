@@ -36,6 +36,7 @@ import ToutorStudent from "../Dashboard/ToutorDashborad/ToutorStudent";
 import ToutorSendMessages from "../Dashboard/ToutorDashborad/ToutorSendMessages";
 import SignUp from "../Authentication/SignUp";
 import ProtectedRoute from "./ProtectedRoute";
+import TutorProtectedRoute from "./TutorProtectedRoute";
 
 export const router = createBrowserRouter([
     {
@@ -151,7 +152,11 @@ export const router = createBrowserRouter([
     ,
     {
         path: 'toturdashbord',
-        Component: ToutorDashbord,
+        Component: () => (
+            <TutorProtectedRoute>
+                <ToutorDashbord />
+            </TutorProtectedRoute>
+        ),
         children: [
             {
                 path: 'toutornotification',
