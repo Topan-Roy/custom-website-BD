@@ -134,7 +134,7 @@ export const router = createBrowserRouter([
                 Component: EditProfile
             },
             {
-                path: 'tutordetails',
+                path: 'tutordetails/:id',
                 Component: TutorDetails
             },
             {

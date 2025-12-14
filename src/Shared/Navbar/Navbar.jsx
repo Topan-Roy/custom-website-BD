@@ -1,7 +1,8 @@
-import React from 'react';
 import { Link, NavLink } from 'react-router';
 import logo from '../../assets/image.png'
+import { useAuth } from '../../../context/UseAuth';
 const Navbar = () => {
+  const { user } = useAuth()
   return (
     <nav className="flex justify-between items-center p-5 px-20  ">
       <div className="logo">
@@ -43,22 +44,29 @@ const Navbar = () => {
           </NavLink>
         </li>
       </ul>
-
-
-      <div className="auth-links flex space-x-4">
-        <Link to='/login'>
-          <button className="bg-gradient-to-r from-[#FFC30B] via-[#9235bd] to-[#8113B5] text-[#FFFFFF] px-4 py-2 rounded-2xl ">
+      {
+        user ? (
+          <div className="flex items-center space-x-2">
+            <Link to='/dashboard/myprofile'>
+              <img src={user?.avatar} alt="user" className="w-9 h-9 rounded-full border" />
+              <span className="font-medium text-[14px] text-[#585858]">{user.name}</span>
+            </Link>
+          </div>
+        ) : (<div className="auth-links flex space-x-4"><Link to='/login'>
+          <button className="bg-gradient-to-r from-[#FFC30B] via-[#9235bd] to-[#8113B5] text-[#FFFFFF] px-4 py-2 rounded-2xl cursor-pointer">
             Login
           </button>
 
         </Link>
-        <Link to="/signup">
-          <button className="bg-gradient-to-r from-[#6657E2] via-[#8113B5] to-[#903CD1] text-[#FFFFFF] px-4 py-2 rounded-2xl ">
-            Sign Up
-          </button>
-        </Link>
+          <Link to="/signup">
+            <button className="bg-gradient-to-r from-[#6657E2] via-[#8113B5] to-[#903CD1] text-[#FFFFFF] px-4 py-2 rounded-2xl cursor-pointer">
+              Sign Up
+            </button>
+          </Link>
+        </div>)
+      }
 
-      </div>
+
 
     </nav>
   );

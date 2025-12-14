@@ -1,24 +1,43 @@
+import { useEffect, useState } from 'react';
 import logo from '../../assets/Frame2.png'
 import logo1 from '../../assets/Frame4.png'
+import api from '../../services/api';
+import Spinner from '../../Components/Spinner';
 export default function PaymentHistory() {
 
-  const transactions = [
-    {
-      id: "000-3839###",
-      title: "Lesson with Rokey Mahmud",
-      date: "8 Jan 2025",
-      amount: 35,
-      status: "Completed",
-    },
-    {
-      id: "000-3839###",
-      title: "Lesson with Rokey Mahmud",
-      date: "8 Jan 2025",
-      amount: 35,
-      status: "Completed",
-    },
-  ];
-
+  // const transactions = [
+  //   {
+  //     id: "000-3839###",
+  //     title: "Lesson with Rokey Mahmud",
+  //     date: "8 Jan 2025",
+  //     amount: 35,
+  //     status: "Completed",
+  //   },
+  //   {
+  //     id: "000-3839###",
+  //     title: "Lesson with Rokey Mahmud",
+  //     date: "8 Jan 2025",
+  //     amount: 35,
+  //     status: "Completed",
+  //   },
+  // ];
+  // this is for transaction history api calling part 
+  const [transactions, setTransactions] = useState([]);
+  const [paymentHistory, setPaymentHistory] = useState([]);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const PaymentData = async () => {
+      const res = await api.get("/transaction/student/wallet");
+      setPaymentHistory(res.response.data)
+      setTransactions(res.response.data.lastTransactions);
+      setLoading(false);
+    }
+    PaymentData();
+  }, [])
+  console.log(paymentHistory)
+  if(loading){
+    return <Spinner text='Payment History loading...'/>
+  }
   return (
     <div className="  min-h-screen">
       {/* Header */}
@@ -38,7 +57,7 @@ export default function PaymentHistory() {
             <img src={logo} alt="" />
           </div>
           <p className="text-gray-500 text-md">Pending</p>
-          <p className="text-xl text-[#585858] font-bold">0</p>
+          <p className="text-xl text-[#585858] font-bold">${paymentHistory.totalPendingPayments}</p>
         </div>
 
         {/* Total Spent */}
@@ -48,12 +67,12 @@ export default function PaymentHistory() {
             <img src={logo1} alt="" />
           </div>
           <p className="text-gray-500 text-md">Total Spent</p>
-          <p className="text-xl text-[#585858] font-bold">$90.00</p>
+          <p className="text-xl text-[#585858] font-bold">${paymentHistory.totalSpent}</p>
 
           {/* small overlapping avatar circle */}
           <div className="absolute -top-2 -right-3 flex -space-x-2">
-           
-          
+
+
           </div>
         </div>
 
@@ -61,10 +80,10 @@ export default function PaymentHistory() {
         <div className="flex-1 bg-white rounded-lg p-5 shadow-sm flex flex-col items-center gap-2">
           <div className="p-2 rounded-md bg-purple-100">
             {/* credit card icon */}
-         <img src={logo1} alt="" />
+            <img src={logo1} alt="" />
           </div>
           <p className="text-gray-500 text-md">Completed</p>
-          <p className="text-xl text-[#585858] font-bold">3</p>
+          <p className="text-xl text-[#585858] font-bold">{paymentHistory.completedPayments}</p>
         </div>
       </div>
 
@@ -74,15 +93,15 @@ export default function PaymentHistory() {
           Transaction History
         </h3>
 
-        {transactions.map((tx, i) => (
+        {transactions.length > 0 ? transactions.map((tx, i) => (
           <div
-            key={i}
+            key={tx.id}
             className="flex justify-between items-center border border-gray-200 rounded-md p-4"
           >
             <div className="flex items-center gap-3">
               <div className="p-2 rounded-md bg-purple-100">
                 {/* credit card icon */}
-               <img src={logo1} alt="" />
+                <img src={logo1} alt="" />
               </div>
               <div>
                 <p className="text-[#6657E2] font-semibold text-xl">
@@ -102,7 +121,9 @@ export default function PaymentHistory() {
               <p className="text-purple-700 mt-3 font-semibold">${tx.amount}.00</p>
             </div>
           </div>
-        ))}
+        )) : (
+          <p className="text-center">No transactions found</p>
+        )}
       </div>
     </div>
   );

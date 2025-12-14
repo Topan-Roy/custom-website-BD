@@ -172,14 +172,32 @@ const AuthProvider = ({ children }) => {
     // this is for logout user 
     const logOut = async () => {
         try {
-            const response = await api.post("/auth/logout")
-            setUser(null)
-            localStorage.removeItem('authToken')
-            toast.success("Logged out successfully!")
-            return response
+            const refreshToken = localStorage.getItem('refreshToken');
+
+            // Only send refreshToken if it exists
+            if (refreshToken) {
+                await api.post("/auth/logout", {
+                    refreshToken: refreshToken
+                });
+            }
+
+            // Clear local storage regardless of API response
+            setUser(null);
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('refreshToken');
+            toast.success("Logged out successfully!");
+
+            return { success: true };
         } catch (error) {
-            toast.error(error?.response?.data?.message || "Logout failed")
-            throw error
+            // Still clear local storage on error to ensure user is logged out
+            setUser(null);
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('refreshToken');
+
+            // Show error but don't throw to prevent app crash
+            toast.error(error?.response?.data?.message || "Logout completed");
+
+            return { success: false, error: error.message };
         }
     }
     // this is for delete user 
@@ -188,6 +206,7 @@ const AuthProvider = ({ children }) => {
             const response = await api.delete("/auth/delete-me")
             setUser(null)
             localStorage.removeItem('authToken')
+            localStorage.removeItem('refreshToken')
             toast.success("Account deleted successfully!")
             return response
         } catch (error) {

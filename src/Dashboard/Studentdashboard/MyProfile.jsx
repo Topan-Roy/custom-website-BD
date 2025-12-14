@@ -51,7 +51,7 @@ export default function MyProfile() {
                         <p className="text-[#7C7C7C] text-sm mb-2">Interests</p>
 
                         <div className="flex flex-wrap gap-2">
-                            {["English", "Literature", "Easy Writing", "Creative Writing"].map((item) => (
+                            {user?.student?.interestedSubjects?.map((item) => (
                                 <span
                                     key={item}
                                     className="px-3 py-1 font-medium text-xs rounded-full bg-[#EBEBEB] border border-[#E3E3FF]
@@ -59,7 +59,7 @@ export default function MyProfile() {
                                 >
                                     {item}
                                 </span>
-                            ))}
+                            )) || <span className="text-gray-500 text-sm">No interests specified</span>}
                         </div>
 
                     </div>
