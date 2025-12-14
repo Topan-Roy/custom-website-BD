@@ -1,8 +1,11 @@
-import React from "react";
 import { FiCalendar, FiClock } from "react-icons/fi";
 import logo1 from "../../assets/IMG_8.png";
+import { useEffect, useState } from "react";
+import api from "../../services/api";
 
 export default function MyLessonsPage() {
+  // this is for state 
+  const [lessonData, setLessonData] = useState(null)
   const LessonCard = ({ img, name, subject, chapter, date, time, status }) => {
     const statusColor =
       status === "Completed"
@@ -12,7 +15,7 @@ export default function MyLessonsPage() {
     return (
       <div className="w-full h-[200px] bg-white  rounded-lg p-10 shadow-[0_2px_6px_rgba(0,0,0,0.04)] flex items-start gap-4 ">
 
-    
+
         <img
           src={img}
           alt="profile"
@@ -56,6 +59,16 @@ export default function MyLessonsPage() {
     );
   };
 
+
+  // this is the lesson data from data bse 
+  useEffect(() => {
+    const loadData = async () => {
+      const res = await api.get("/dashboard/student")
+      setLessonData(res.response.data.upcomingLessons)
+    }
+    loadData()
+  }, [])
+  console.log(lessonData)
   return (
     <div className=" bg-[#F5FAF7] min-h-screen">
 
@@ -79,18 +92,6 @@ export default function MyLessonsPage() {
         date="10 Aug 2025"
         time="6:00pm - 07:00pm"
         status="Completed"
-      />
-
-      <div className="h-5" />
-
-     <LessonCard
-        img={logo1}
-        name="Rokey Mahmud"
-        subject="English"
-        chapter="Grammar"
-        date="20 November 2025"
-        time="6:00pm - 07:00pm"
-        status="Scheduled"
       />
     </div>
   );

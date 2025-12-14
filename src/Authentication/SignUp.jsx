@@ -1,18 +1,34 @@
-import React from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router";
+import { useAuth } from "../../context/UseAuth";
 
 const SignUp = () => {
   const navigate = useNavigate();
-
-  const handleSubmit = (e) => {
+  const { register } = useAuth();
+  const [error, setError] = useState("");
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setError("");
+
+    const name = e.target.name.value;
+    const email = e.target.email.value;
+    const password = e.target.password.value;
     const role = e.target.role.value;
 
-    // 👉 always go to enterverification page
-    navigate("/enterverification", {
-      state: { role },
-    });
+    try {
+      const res = await register(email, password, name, role);
+      console.log(res)
+      navigate("/enterverification", {
+        state: { email, role },
+      });
+    } catch (err) {
+      const message =
+        err?.response?.data?.message ||
+        err?.response?.data?.error ||
+        "Registration failed";
+      setError(message);
+    }
   };
 
   return (
@@ -36,6 +52,9 @@ const SignUp = () => {
         </div>
 
         <form onSubmit={handleSubmit}>
+          {error ? (
+            <p className="mb-6 text-sm text-red-600">{error}</p>
+          ) : null}
 
           {/* Name */}
           <div className="mb-6">
@@ -44,6 +63,7 @@ const SignUp = () => {
             </label>
             <input
               type="text"
+              name="name"
               className="mt-2 w-full px-3 py-2 border rounded-lg"
               placeholder="Full Name"
               required
@@ -57,6 +77,7 @@ const SignUp = () => {
             </label>
             <input
               type="email"
+              name="email"
               className="mt-2 w-full px-3 py-2 border rounded-lg"
               placeholder="Email Address"
               required
@@ -70,6 +91,7 @@ const SignUp = () => {
             </label>
             <input
               type="password"
+              name="password"
               className="mt-2 w-full px-3 py-2 border rounded-lg"
               placeholder="Password"
               required

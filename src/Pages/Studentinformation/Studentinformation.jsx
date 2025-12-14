@@ -180,8 +180,4 @@ const Studentinformation = () => {
   );
 };
 
-<<<<<<< HEAD
 export default Studentinformation;
-=======
-export default Studentinformation;//
->>>>>>> origin/soriful

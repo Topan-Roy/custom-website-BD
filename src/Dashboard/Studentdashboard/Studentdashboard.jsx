@@ -10,17 +10,14 @@ import logo4 from '../../assets/Frame4.png'
 import logo5 from '../../assets/Vector.png'
 import { MdPeopleAlt } from "react-icons/md";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { useAuth } from "../../../context/UseAuth";
+import api from "../../services/api";
 
 const Studentdashboard = () => {
-
-
+    const { user } = useAuth()
+    // console.log(user)
     const [dashboardData, setDashboardData] = useState(null);
     const [loading, setLoading] = useState(true);
-
-
-    const token = localStorage.getItem("token");
-
     const { pathname } = useLocation();
 
 
@@ -29,22 +26,8 @@ const Studentdashboard = () => {
     useEffect(() => {
         const fetchDashboard = async () => {
             try {
-                const token = localStorage.getItem("token");
-
-                const res = await axios.get(
-                    "https://abilities-wav-behind-outdoors.trycloudflare.com/api/v1/dashboard/student",
-                    {
-                        headers: {
-                            Authorization: `Bearer ${token}`,
-                        },
-                    }
-                );
-
-                console.log("DASHBOARD:", res.data);
-
-                // 🔴 IMPORTANT
-                setDashboardData(res.data.response.data);
-
+                const res = await api.get("/dashboard/student")
+                setDashboardData(res.response.data)
             } catch (error) {
                 console.log("DASHBOARD ERROR:", error);
             } finally {
@@ -54,10 +37,9 @@ const Studentdashboard = () => {
 
         fetchDashboard();
     }, []);
-
-    // if (loading) {
-    //   return <div className="p-10">Loading dashboard...</div>;
-    // }
+    if (loading) {
+        return <div className="p-10">Loading dashboard...</div>;
+    }
 
     return (
         <div className="w-full min-h-screen flex ">
@@ -405,7 +387,7 @@ const Studentdashboard = () => {
                     <div className="w-full bg-[#FFFFFF] shadow-md py-3 px-6 flex justify-between items-center rounded-2xl mb-6">
                         <div>
                             <h2 className="text-[20px] font-semibold bg-gradient-to-r from-[#FFC30B] via-[#8113B5] to-[#8113B5] text-transparent bg-clip-text">
-                                Welcome Back Rokey!
+                                Welcome Back {user.name}!
                             </h2>
 
                             <p className="text-[#606060] text-[13px]">Here's an overview of your learning journey.</p>

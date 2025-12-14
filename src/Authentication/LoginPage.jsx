@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router';
-import axios from 'axios';
+import { useAuth } from '../../context/UseAuth';
 
 const LoginPage = () => {
 
@@ -9,44 +9,23 @@ const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-
+  const { signin } = useAuth()
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
-
-    try {
-      const res = await axios.post(
-        "https://abilities-wav-behind-outdoors.trycloudflare.com/api/v1/auth/login",
-        {
-          email,
-          password,
-        }
-      );
-
-      const user = res.data.response.data;
-      const token = res.data.response.tokens.access.token;
-
-      // save token
-      localStorage.setItem("token", token);
-      localStorage.setItem("role", user.role);
-
-      alert("Login successful");
-
-      // 👉 role based redirect
-      if (user.role === "student") {
-        navigate("/dashboard");
-      } else if (user.role === "teacher") {
-        navigate("/toturdashbord");
-      } else {
-        navigate("/");
-      }
-
-    } catch (error) {
-      console.log("LOGIN ERROR:", error);
-      alert("Email or Password wrong");
-    } finally {
-      setLoading(false);
+    const res = await signin(email, password)
+    console.log(res.response)
+    const role = res.response.data.role
+    // 👉 role based redirect
+    if (role === "student") {
+      navigate("/dashboard");
+    } else if (role === "teacher") {
+      navigate("/toturdashbord");
+    } else {
+      navigate("/");
     }
+
+
   };
 
   return (
