@@ -128,7 +128,7 @@ const FindTutors = () => {
             <button className="
       bg-[#EBEBEB] border border-[#E5E7EB]
       h-[52px] w-full sm:w-[55px] rounded-xl shadow-sm
-      flex items-center justify-center
+      flex items-center justify-center 
     ">
               <span className="text-xl">
                 <LuSettings2 />
@@ -183,7 +183,7 @@ const FindTutors = () => {
       <Link to="/dashboard/tutordetails">
         <button
           className="w-full mt-5 py-3 text-white font-medium rounded-lg 
-       bg-gradient-to-r from-[#FFC30B] via-[#8113B5] to-[#8113B5]"
+       bg-gradient-to-r from-[#FFC30B] via-[#8113B5] to-[#8113B5] cursor-pointer"
         >
           View Details
         </button>

@@ -19,14 +19,14 @@ const Learning = () => {
           <button
             className="px-8 py-3 rounded-full font-medium text-white 
       bg-gradient-to-r from-[#FFC30B] via-[#8113B5]  to-[#8113B5] 
-      shadow-md ">
+      shadow-md cursor-pointer">
             Sign Up Now
           </button>
         </Link>
         <button
           className="px-8 py-3 rounded-full font-medium text-white 
       bg-gradient-to-r from-[#6657E2] via-[#8113B5]  to-[#903CD1] 
-      shadow-md">
+      shadow-md cursor-pointer">
           Browse Tutors
         </button>
 

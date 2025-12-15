@@ -102,7 +102,7 @@ export default function Support() {
                         <div className="relative w-full max-w-4xl"> {/* WIDTH BIGGER */}
 
                             {/* Plus Icon (Left Outside) */}
-                            <button className="absolute -left-10 top-1/2 -translate-y-1/2 bg-white shadow-md w-10 h-10 rounded-full flex items-center justify-center text-purple-600 text-2xl font-bold">
+                            <button className="absolute -left-10 top-1/2 -translate-y-1/2 bg-white shadow-md w-10 h-10 rounded-full flex items-center justify-center text-purple-600 text-2xl font-bold cursor-pointer">
                                 +
                             </button>
 
@@ -117,7 +117,7 @@ export default function Support() {
 
                             {/* Send Icon (Right Outside) */}
                             <button className="absolute -right-10 top-1/2 -translate-y-1/2 bg-white shadow-md w-10 h-10 rounded-full flex items-center justify-center text-purple-600 text-xl">
-                                <img src={logo} alt="" />
+                                <img src={logo} alt="" className="cursor-pointer"/>
                             </button>
 
                         </div>

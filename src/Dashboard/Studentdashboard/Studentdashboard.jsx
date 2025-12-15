@@ -42,7 +42,7 @@ const Studentdashboard = () => {
 
                 console.log("DASHBOARD:", res.data);
 
-                // 🔴 IMPORTANT
+                
                 setDashboardData(res.data.response.data);
 
             } catch (error) {
@@ -411,7 +411,7 @@ const Studentdashboard = () => {
                             <p className="text-[#606060] text-[13px]">Here's an overview of your learning journey.</p>
                         </div>
 
-                        <div className="flex items-center space-x-5">
+                        <div className="flex items-center space-x-5 ">
                             <NavLink to="/dashboard/notification">
                                 <div className="relative cursor-pointer">
                                     <button className="bg-[#EBEBEB] p-2.5 rounded-full text-lg shadow-sm">
@@ -429,7 +429,7 @@ const Studentdashboard = () => {
 
 
 
-                            <div className="flex items-center space-x-2">
+                            <div className="flex items-center space-x-2 cursor-pointer">
                                 <Link to='/dashboard/myprofile'>
                                     <img src={logo1} alt="user" className="w-9 h-9 rounded-full border" />
                                     <span className="font-medium text-[14px] text-[#585858]">Rokey</span>

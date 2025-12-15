@@ -144,9 +144,9 @@ export default function ToutorEditProfile() {
                                     </div>
           </div>
 
-          {/* EDIT BUTTON */}
+          {/* EDIT BUTTON */} 
           <div className="w-full flex justify-end">
-            <button className="mt-3 bg-gradient-to-r from-[#6657E2] to-[#903CD1] hover:opacity-90 text-white px-6 py-3 rounded-lg flex items-center gap-2 text-sm font-medium shadow-md">
+            <button className="mt-3 bg-gradient-to-r from-[#6657E2] to-[#903CD1] hover:opacity-90 text-white px-6 py-3 rounded-lg flex items-center gap-2 text-sm font-medium shadow-md cursor-pointer">
               
               Save Change
             </button>

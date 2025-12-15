@@ -47,13 +47,13 @@ const Navbar = () => {
 
       <div className="auth-links flex space-x-4">
         <Link to='/login'>
-          <button className="bg-gradient-to-r from-[#FFC30B] via-[#9235bd] to-[#8113B5] text-[#FFFFFF] px-4 py-2 rounded-2xl ">
+          <button className="bg-gradient-to-r from-[#FFC30B] via-[#9235bd] to-[#8113B5] text-[#FFFFFF] px-4 py-2 rounded-2xl cursor-pointer ">
             Login
           </button>
 
         </Link>
         <Link to="/signup">
-          <button className="bg-gradient-to-r from-[#6657E2] via-[#8113B5] to-[#903CD1] text-[#FFFFFF] px-4 py-2 rounded-2xl ">
+          <button className="bg-gradient-to-r from-[#6657E2] via-[#8113B5] to-[#903CD1] text-[#FFFFFF] px-4 py-2 rounded-2xl cursor-pointer">
             Sign Up
           </button>
         </Link>

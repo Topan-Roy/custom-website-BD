@@ -24,12 +24,12 @@ const HeroSection = () => {
                     </p>
 
                     <div className="flex space-x-4">
-                        <button className="bg-gradient-to-r from-[#FFC30B] via-[#8c22be] to-[#8113B5]  text-[#ffffff]  px-6 py-3 rounded-xl transition">
+                        <button className="bg-gradient-to-r from-[#FFC30B] via-[#8c22be] to-[#8113B5]  text-[#ffffff]  px-6 py-3 rounded-xl transition cursor-pointer">
                             Get Started Free
                         </button>
 
 
-                        <button className="bg-gradient-to-r from-[#6657E2] via-[#8113B5]  to-[#903CD1] text-[#ffffff]  px-8 py- rounded-xl transition">
+                        <button className="bg-gradient-to-r from-[#6657E2] via-[#8113B5]  to-[#903CD1] text-[#ffffff]  px-8 py- rounded-xl transition cursor-pointer">
                             Find Tutors
                         </button>
                     </div>

@@ -133,7 +133,7 @@ const ToutorStudent = () => {
       <Link to="/toturdashbord/toutorsendmessagest">
         <button
           className="w-full mt-5 py-3 text-white font-medium rounded-lg 
-          bg-gradient-to-r from-[#6657E2] via-[#903CD1] to-[#903CD1]"
+          bg-gradient-to-r from-[#6657E2] via-[#903CD1] to-[#903CD1] cursor-pointer"
         >
          Massage
         </button>
