@@ -1,21 +1,20 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router';
-import { useAuth } from '../../context/UseAuth';
+import { useState } from "react";
+import { Link, useNavigate } from "react-router";
+import { useAuth } from "../../context/UseAuth";
 
 const LoginPage = () => {
-
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const { signin } = useAuth()
+  const { signin } = useAuth();
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const res = await signin(email, password)
-    console.log(res.response)
-    const role = res.response.data.role
+    const res = await signin(email, password);
+    console.log(res.response);
+    const role = res.response.data.role;
     // 👉 role based redirect
     if (role === "student") {
       navigate("/dashboard");
@@ -24,14 +23,11 @@ const LoginPage = () => {
     } else {
       navigate("/");
     }
-
-
   };
 
   return (
     <div className="flex items-center justify-center min-h-screen">
       <div className="bg-white rounded-2xl w-full max-w-lg px-16 py-40 shadow-xl">
-
         <div className="mb-12">
           <h2 className="text-3xl font-semibold bg-gradient-to-r from-[#614EFE] to-[#7D359F] bg-clip-text text-transparent">
             Login to your account
@@ -40,7 +36,7 @@ const LoginPage = () => {
           <p className="text-sm text-[#585858] mt-3">
             Don't have an account?{" "}
             <a
-              href="/selectrole"
+              href="/signup"
               className="bg-gradient-to-r from-[#614EFE] to-[#7D359F] bg-clip-text text-transparent font-medium"
             >
               Register
@@ -49,7 +45,6 @@ const LoginPage = () => {
         </div>
 
         <form onSubmit={handleLogin}>
-
           <div className="mb-7">
             <label className="block text-sm font-medium text-[#585858]">
               Email <span className="text-red-500">*</span>
@@ -87,9 +82,7 @@ const LoginPage = () => {
           >
             {loading ? "Logging in..." : "Login"}
           </button>
-
         </form>
-
       </div>
     </div>
   );

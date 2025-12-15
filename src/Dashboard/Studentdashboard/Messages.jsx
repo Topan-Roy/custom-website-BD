@@ -50,7 +50,7 @@ export default function Messages() {
     const activeConversation = conversations.find(
         (conv) => conv.name === activeUser
     );
-//
+// this is for messages
     return (
         <div className="">
             {/* Header */}

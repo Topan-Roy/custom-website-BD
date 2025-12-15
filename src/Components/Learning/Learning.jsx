@@ -1,10 +1,9 @@
-import React from 'react';
-import { Link } from 'react-router';
+import React from "react";
+import { Link } from "react-router";
 
 const Learning = () => {
   return (
     <div className="w-full  bg-[#E3E6F0] py-20 mt-20 text-center ">
-
       <h2 className="text-3xl font-semibold text-[#8113B5]">
         Ready to start learning?
       </h2>
@@ -15,11 +14,12 @@ const Learning = () => {
       </p>
 
       <div className="flex items-center justify-center gap-4 mt-8">
-        <Link to='/selectrole'>
+        <Link to="/signup">
           <button
             className="px-8 py-3 rounded-full font-medium text-white 
       bg-gradient-to-r from-[#FFC30B] via-[#8113B5]  to-[#8113B5] 
-      shadow-md cursor-pointer">
+      shadow-md "
+          >
             Sign Up Now
           </button>
         </Link>
@@ -29,10 +29,8 @@ const Learning = () => {
       shadow-md cursor-pointer">
           Browse Tutors
         </button>
-
       </div>
     </div>
-
   );
 };
 
