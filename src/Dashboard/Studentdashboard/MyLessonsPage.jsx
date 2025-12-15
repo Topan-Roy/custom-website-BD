@@ -1,28 +1,31 @@
-import React from "react";
 import { FiCalendar, FiClock } from "react-icons/fi";
 import logo1 from "../../assets/IMG_8.png";
+import { useEffect, useState } from "react";
+import api from "../../services/api";
+import Spinner from "../../Components/Spinner";
 
 export default function MyLessonsPage() {
-  const LessonCard = ({ img, name, subject, chapter, date, time, status }) => {
+  // this is for state 
+  const [lessonData, setLessonData] = useState(null)
+  const LessonCard = ({ data }) => {
+    const { img, name, subject, chapter, date, time, status } = data
+    console.log(data)
     const statusColor =
       status === "Completed"
         ? "bg-[#D1FAE5] text-[#0F766E]"
         : "bg-[#E5E7EB] text-[#6B7280]";
 
     return (
-      <div className="w-full h-[200px] bg-white  rounded-lg p-10 shadow-[0_2px_6px_rgba(0,0,0,0.04)] flex items-start gap-4 ">
-
-    
+      <div className="w-full bg-white rounded-lg p-10 shadow-[0_2px_6px_rgba(0,0,0,0.04)] flex flex-col items-start gap-4">
         <img
-          src={img}
+          src={img || logo1}
           alt="profile"
           className="w-[55px] h-[55px] rounded-full object-cover shrink-0"
         />
 
-        <div className="flex-1">
-          <div className="flex items-center gap-30 mb-1">
-            <h2 className="text-[16px] font-medium text-gray-800">{name}</h2>
-
+        <div className="w-1/2">
+          <div className="flex items-center w-full justify-between mb-3">
+            <h2 className="text-[16px] font-medium text-gray-800">{data.teacher.name}</h2>
             <span
               className={`text-[11px] px-3 py-[2px] rounded-full whitespace-nowrap ${statusColor}`}
             >
@@ -30,25 +33,25 @@ export default function MyLessonsPage() {
             </span>
           </div>
 
-          <p className="text-gray-600 text-[14px]">
+          <p className="text-gray-600 text-[14px] mb-1">
             <span className="font-medium">Subject:</span> {subject}
           </p>
 
-          <p className="text-gray-600 text-[14px]">
+          <p className="text-gray-600 text-[14px] mb-3">
             <span className="font-medium">Chapter:</span> {chapter}
           </p>
 
-          <div className="flex items-center gap-4 mt-2 text-gray-600 text-[13px] flex-wrap">
+          <div className="flex items-center gap-4 text-gray-600 text-[13px]">
             <div className="flex items-center gap-2">
               <FiCalendar className="text-[14px]" />
               {date}
             </div>
 
-            <span className="text-gray-400 hidden sm:block">|</span>
+            <span className="text-gray-400">|</span>
 
             <div className="flex items-center gap-2">
               <FiClock className="text-[14px]" />
-              {time}
+              {data.updatedAt}
             </div>
           </div>
         </div>
@@ -56,6 +59,20 @@ export default function MyLessonsPage() {
     );
   };
 
+
+  // this is the lesson data from data bse 
+  useEffect(() => {
+    const loadData = async () => {
+      const res = await api.get("/dashboard/student")
+      setLessonData(res.response.data.upcomingLessons)
+    }
+    loadData()
+  }, [])
+  if (!lessonData) {
+    return <Spinner text="Loading dashboard..." />
+  }
+  // LessonCard(lessonData)
+  // console.log(lessonData)
   return (
     <div className=" bg-[#F5FAF7] min-h-screen">
 
@@ -70,28 +87,13 @@ export default function MyLessonsPage() {
       <p className="text-gray-500 mb-6 text-[13px]">
         Manage your upcoming, past, and cancelled lessons.
       </p>
-
-      <LessonCard
-        img={logo1}
-        name="Rokey Mahmud"
-        subject="English"
-        chapter="Grammar"
-        date="10 Aug 2025"
-        time="6:00pm - 07:00pm"
-        status="Completed"
-      />
-
-      <div className="h-5" />
-
-     <LessonCard
-        img={logo1}
-        name="Rokey Mahmud"
-        subject="English"
-        chapter="Grammar"
-        date="20 November 2025"
-        time="6:00pm - 07:00pm"
-        status="Scheduled"
-      />
+      <div className="flex flex-col gap-4">
+        {
+          lessonData.map((data) => (
+            <LessonCard key={data.id} data={data} />
+          ))
+        }
+      </div>
     </div>
   );
 }

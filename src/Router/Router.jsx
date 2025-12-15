@@ -1,5 +1,4 @@
 import { createBrowserRouter } from "react-router";
-import { RouterProvider } from "react-router/dom";
 import RootLayout from "../Layout/RootLayout";
 import Home from "../Components/Home/Home";
 import LoginPage from "../Authentication/LoginPage";
@@ -35,155 +34,165 @@ import ToutorEditProfile from "../Dashboard/ToutorDashborad/ToutorEditProfile";
 import ToutorStudent from "../Dashboard/ToutorDashborad/ToutorStudent";
 import ToutorSendMessages from "../Dashboard/ToutorDashborad/ToutorSendMessages";
 import SignUp from "../Authentication/SignUp";
+import ProtectedRoute from "./ProtectedRoute";
+import TutorProtectedRoute from "./TutorProtectedRoute";
 
 export const router = createBrowserRouter([
-  {
-    path: "/",
-   Component:RootLayout,
-   children:[
     {
-        index:true,
-        Component:Home
+        path: "/",
+        Component: RootLayout,
+        children: [
+            {
+                index: true,
+                Component: Home
+            },
+            {
+                path: 'login',
+                Component: LoginPage
+            },
+            {
+                path: 'signup',
+                Component: SignUp
+            },
+            {
+                path: 'selectrole',
+                Component: SelectRole
+            },
+            {
+                path: 'studentinformation',
+                Component: Studentinformation
+            },
+            {
+                path: 'tutorinformation',
+                Component: Tutorinformation
+            },
+            {
+                path: 'toutorstap2',
+                Component: Toutorstap2
+            },
+            {
+                path: 'stepthree',
+                Component: StepThree
+            },
+            {
+                path: 'recoveraccount',
+                Component: RecoverAccount
+            },
+            {
+                path: 'enterverification',
+                Component: EnterVerification
+            },
+            {
+                path: 'setpassword',
+                Component: SetPassword
+            },
+
+        ]
     },
     {
-        path:'login',
-        Component:LoginPage
-    },
+        path: '/dashboard',
+        Component: () => (
+            <ProtectedRoute>
+                <Studentdashboard />
+            </ProtectedRoute>
+        ),
+        children: [
+            {
+                path: 'findtutors',
+                Component: FindTutors
+            },
+            {
+                path: 'notification',
+                Component: Notification
+            },
+            {
+                path: 'myLessonspage',
+                Component: MyLessonsPage
+            },
+            {
+                path: 'filtersidebar',
+                Component: FilterSidebar
+            },
+            {
+                path: 'paymenthistory',
+                Component: PaymentHistory
+            },
+            {
+                path: 'messages',
+                Component: Messages
+            },
+            {
+                path: 'support',
+                Component: Support
+            },
+            {
+                path: 'myprofile',
+                Component: MyProfile
+            },
+            {
+                path: 'editprofile',
+                Component: EditProfile
+            },
+            {
+                path: 'tutordetails/:id',
+                Component: TutorDetails
+            },
+            {
+                path: 'paymentul',
+                Component: PaymentUI
+            },
+            {
+                path: 'sendmessages',
+                Component: SendMessages
+            },
+
+        ]
+    }
+    ,
     {
-        path:'signup',
-        Component:SignUp
-    },
-    {
-        path:'selectrole',
-        Component:SelectRole
-    },
-    {
-        path:'studentinformation',
-        Component:Studentinformation
-    },
-    {
-        path:'tutorinformation',
-        Component:Tutorinformation
-    },
-    {
-        path:'toutorstap2',
-        Component:Toutorstap2
-    },
-    {
-        path:'stepthree',
-        Component: StepThree
-    },
-    {
-        path:'recoveraccount',
-        Component:RecoverAccount
-    },
-    {
-        path:'enterverification',
-        Component:EnterVerification
-    },
-    {
-        path:'setpassword',
-        Component:SetPassword
-    },
-    
-   ]
-  },
-  {
-    path:'/dashboard',
-    Component:Studentdashboard,
-    children:[
-        {
-            path:'findtutors',
-            Component:FindTutors
-        },
-        {
-            path:'notification',
-            Component:Notification
-        },
-        {
-            path:'myLessonspage',
-            Component:MyLessonsPage
-        },
-        {
-            path:'filtersidebar',
-            Component:FilterSidebar
-        },
-        {
-            path:'paymenthistory',
-            Component:PaymentHistory
-        },
-        {
-            path:'messages',
-            Component:Messages
-        },
-        {
-            path:'support',
-            Component:Support
-        },
-        {
-            path:'myprofile',
-            Component:MyProfile
-        },
-        {
-            path:'editprofile',
-            Component:EditProfile
-        },
-        {
-            path:'tutordetails',
-            Component:TutorDetails
-        },
-        {
-            path:'paymentul',
-            Component:PaymentUI
-        },
-        {
-            path:'sendmessages',
-            Component:SendMessages
-        },
-       
-    ]
-  }
-  ,
-  {
-    path:'toturdashbord',
-    Component:ToutorDashbord,
-    children:[
-        {
-            path:'toutornotification',
-            Component:ToutorNotification
-        },
-        {
-            path:'toutormyLessonspage',
-            Component:ToutorMyLessonsPage
-        },
-        {
-            path:'earning',
-            Component:Earning
-        },
-        {
-            path:'toutormessages',
-            Component:ToutorMessages
-        },
-        {
-            path:'toutorsupport',
-            Component:ToutorSupport
-        },
-        {
-            path:'toutormyprofile',
-            Component:ToutorMyProfile
-        },
-        {
-            path:'toutoreditprofile',
-            Component:ToutorEditProfile
-        },
-        {
-            path:'toutorstudent',
-            Component:ToutorStudent
-        },
-        {
-            path:'toutorsendmessagest',
-            Component:ToutorSendMessages
-        },
-    ]
-  }
+        path: 'toturdashbord',
+        Component: () => (
+            <TutorProtectedRoute>
+                <ToutorDashbord />
+            </TutorProtectedRoute>
+        ),
+        children: [
+            {
+                path: 'toutornotification',
+                Component: ToutorNotification
+            },
+            {
+                path: 'toutormyLessonspage',
+                Component: ToutorMyLessonsPage
+            },
+            {
+                path: 'earning',
+                Component: Earning
+            },
+            {
+                path: 'toutormessages',
+                Component: ToutorMessages
+            },
+            {
+                path: 'toutorsupport',
+                Component: ToutorSupport
+            },
+            {
+                path: 'toutormyprofile',
+                Component: ToutorMyProfile
+            },
+            {
+                path: 'toutoreditprofile',
+                Component: ToutorEditProfile
+            },
+            {
+                path: 'toutorstudent',
+                Component: ToutorStudent
+            },
+            {
+                path: 'toutorsendmessagest',
+                Component: ToutorSendMessages
+            },
+        ]
+    }
 ]); 

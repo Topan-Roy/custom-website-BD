@@ -1,16 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { IoSearch } from "react-icons/io5";
 import { LuSettings2 } from "react-icons/lu";
 
-import { Link } from "react-router";
+import { Link, useParams } from "react-router";
 import profileImg from "../../assets/IMG_8.png";
 import logo2 from "../../assets/business_center.png";
 import logo3 from "../../assets/award_star.png";
 import logo4 from "../../assets/payments.png";
-import { HiOutlineArrowLeft } from "react-icons/hi";
 import logo5 from '../../assets/banner.png'
+import api from "../../services/api";
 
 export default function TutorDetails() {
+  const { id } = useParams();
+  const [tutor, setTutor] = useState([]);
+  const tutorData = tutor.find(data => data.id === id)
+  // this is for tutor details api end point calling part 
+  useEffect(() => {
+    const tutorLoad = async () => {
+      const res = await api.get(`/social/teachers`);
+      setTutor(res.response.data.docs)
+    }
+    tutorLoad();
+  }, [])
+
   const reviews = [
     {
       id: 1,
@@ -43,6 +55,15 @@ export default function TutorDetails() {
         "Amazing teaching method! My speaking skills improved a lot within a month."
     }
   ];
+
+  // this is for teacher review data 
+  // useEffect(() => { 
+  //   const tutorReviewLoad = async () => {
+  //     const res = await api.get(`/review/user`);
+  //     setTutor(res.response.data.docs)
+  //   }
+  //   tutorReviewLoad();
+  // }, [])
   return (
     <div className="min-h-screen bg-[#F3F7F2] p-5">
 
@@ -76,9 +97,9 @@ export default function TutorDetails() {
 
         {/* Top Profile */}
         <div className="flex items-center gap-4">
-          <img src={profileImg} className="w-14 h-14 rounded-full" />
+          <img src={tutorData?.avatar} className="w-14 h-14 rounded-full" />
           <div>
-            <h2 className="text-lg font-semibold">Rokey Mahmud</h2>
+            <h2 className="text-lg font-semibold">{tutorData?.name}</h2>
             <p className="text-gray-600">English</p>
           </div>
         </div>
@@ -88,19 +109,19 @@ export default function TutorDetails() {
 
           <div className="flex flex-col items-center">
             <img src={logo2} className="w-7 h-7 mb-1" />
-            <p className="font-semibold text-[14px]">5 years</p>
+            <p className="font-semibold text-[14px]">{tutorData?.teacher.yearsOfTeachingExp} years</p>
             <p className="text-gray-500 text-[11px]">Experience</p>
           </div>
 
           <div className="flex flex-col items-center border-l border-r border-gray-200 px-2">
             <img src={logo4} className="w-7 h-7 mb-1" />
-            <p className="font-semibold text-[14px]">4.5</p>
+            <p className="font-semibold text-[14px]">{tutorData?.teacher.rating}</p>
             <p className="text-gray-500 text-[11px]">Rating</p>
           </div>
 
           <div className="flex flex-col items-center">
             <img src={logo3} className="w-7 h-7 mb-1" />
-            <p className="font-semibold text-[14px]">$45/hr</p>
+            <p className="font-semibold text-[14px]">${tutorData?.teacher.hourlyRate}/hr</p>
             <p className="text-gray-500 text-[11px]">Price</p>
           </div>
 
@@ -108,11 +129,7 @@ export default function TutorDetails() {
 
         {/* Description */}
         <p className="text-gray-700 text-sm mt-6 leading-relaxed">
-          Hi! I’m an experienced English teacher specializing in grammar, spoken English,
-          and academic writing. I help students build confidence, improve fluency, and
-          understand complex topics with simple explanations. Whether you're preparing for
-          exams, enhancing communication skills, or learning English from the basics—I'm
-          here to guide you every step of the way.
+          {tutorData?.bio}
         </p>
 
         {/* Banner Image */}
@@ -126,29 +143,33 @@ export default function TutorDetails() {
         {/* Qualification */}
         <h3 className="mt-8 font-semibold text-[#3D3D3D]">Qualification</h3>
         <p className="text-sm text-[#7C7C7C] mt-2">
-          Bachelor in English Language & Literature<br />
-          University of California, San Francisco<br />
-          2008
+          {tutorData?.teacher.qualification?.map((item, index) => (
+            <span key={item.id || index}>
+              {item.title}, {item.institution} - {item.year}
+              {index < tutorData.teacher.qualification.length - 1 && <br />}
+            </span>
+          ))}
         </p>
 
         {/* Subject */}
         <h3 className="mt-8 font-semibold text-[#7C7C7C]">Subject</h3>
         <div className="flex flex-wrap gap-2 mt-2 max-w-[250px]">
-          {["English", "Literature", "Easy Writing", "Creative Writing"].map((item) => (
-            <span
-              key={item}
-              className="
+          {tutorData?.teacher.subjectsTaught
+            ?.map((item) => (
+              <span
+                key={item}
+                className="
         px-3 py-1 text-sm rounded-full 
         bg-[#EBEBEB]
         border border-[#E3E3FF]
         font-medium
         bg-clip-text text-transparent
-        bg-gradient-to-r from-[#6657E2] to-[#903CD1]
+        bg-linear-to-r from-[#6657E2] to-[#903CD1]
       "
-            >
-              {item}
-            </span>
-          ))}
+              >
+                {item}
+              </span>
+            ))}
         </div>
 
 
@@ -177,11 +198,15 @@ export default function TutorDetails() {
 
         <div className="mt-2 flex flex-col gap-2">
           <span className="px-4 py-2 text-sm text-[#7C7C7C] shadow rounded-lg inline-block w-fit">
-            9:00am to 5:00pm
+            {tutorData?.teacher.availableTime.startTime} to {tutorData?.teacher.availableTime.endTime}
           </span>
 
-          <span className="px-4 py-2 text-sm text-[#7C7C7C] shadow rounded-lg inline-block w-fit">
-            Sunday to Monday
+          <span className="px-4 py-2 text-sm text-[#7C7C7C] shadow rounded-lg flex flex-row gap-4 w-fit ">
+            {tutorData?.teacher.availableDays.map((data, index) => {
+              return (
+                <span key={index}>{data}</span>
+              )
+            })}
           </span>
         </div>
 
@@ -203,7 +228,7 @@ export default function TutorDetails() {
                 {/* Rating */}
                 <div className="flex items-center gap-1 mt-[2px]">
                   <span className="text-[#FFB800] text-sm"> ★★★★★</span>
-                
+
                 </div>
 
                 {/* Review Text */}
@@ -215,17 +240,17 @@ export default function TutorDetails() {
           ))}
         </div>
 
-          <Link to='/dashboard/paymentul'>
-        <button className="w-full mt-5 py-3 text-white font-medium rounded-lg 
+        <Link to='/dashboard/paymentul'>
+          <button className="w-full mt-5 py-3 text-white font-medium rounded-lg 
             bg-gradient-to-r from-[#FFC30B] via-[#8113B5] to-[#8113B5]">
-          Book Now
-        </button>
+            Book Now
+          </button>
         </Link>
         <Link to='/dashboard/sendmessages'>
-        <button className="w-full mt-5 py-3 text-white font-medium rounded-lg 
+          <button className="w-full mt-5 py-3 text-white font-medium rounded-lg 
             bg-gradient-to-r from-[#6657E2] via-[#903CD1] to-[#903CD1]">
-          Massage
-        </button>
+            Massage
+          </button>
         </Link>
       </div>
     </div>

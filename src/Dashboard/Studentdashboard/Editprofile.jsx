@@ -1,16 +1,95 @@
-import { FiChevronDown } from "react-icons/fi";
-
-import profilePic from "../../assets/Frame 2147228418.png";
-import logo from "../../assets/Rectangle 923.png";
+import { FiChevronDown, FiCamera } from "react-icons/fi";
+import { useAuth } from "../../../context/UseAuth";
+import { useState, useRef } from "react";
+import api from "../../services/api";
+import { useNavigate } from "react-router";
 
 export default function EditProfile() {
-  return (
-    <div className=" min-h-screen">
+  const { user, setUser } = useAuth()
+  const [selectedImage, setSelectedImage] = useState(null)
+  const [previewUrl, setPreviewUrl] = useState(user.avatar)
+  const [selectedCountryCode, setSelectedCountryCode] = useState('+1242')
+  const formRef = useRef(null)
+  const navigate = useNavigate()
 
+  const handleImageChange = (e) => {
+    const file = e.target.files[0]
+    if (file) {
+      setSelectedImage(file)
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        setPreviewUrl(reader.result)
+      }
+      reader.readAsDataURL(file)
+    }
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    
+    try {
+      const formData = new FormData(formRef.current)
+      
+      // Get form data
+      const name = formData.get('name')
+      const phoneNumber = formData.get('phoneNumber')
+      const bio = formData.get('bio')
+      
+      // Create FormData for API (API expects formdata, not JSON)
+      const apiFormData = new FormData()
+      
+      // Add required fields
+      if (name) apiFormData.append('name', name)
+      if (bio) apiFormData.append('bio', bio)
+      
+      // Combine country code with phone number
+      const fullPhoneNumber = selectedCountryCode + (phoneNumber || '')
+      if (fullPhoneNumber) apiFormData.append('phoneNumber', fullPhoneNumber)
+      
+      // Add image if selected
+      if (selectedImage) {
+        apiFormData.append('avatar', selectedImage)
+      }
+      
+      console.log('FormData contents:')
+      for (let [key, value] of apiFormData.entries()) {
+        console.log(key, value)
+      }
+      
+      // Send FormData to backend
+      const res = await api.patch("/user/self/update", apiFormData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+      console.log('Update response:', res.data)
+      
+      // Update user state with new data
+      if (res.data?.response?.data) {
+        const updatedUser = res.data.response.data
+        setUser(updatedUser)
+        
+        // Update preview URL if avatar was updated
+        if (updatedUser.avatar) {
+          setPreviewUrl(updatedUser.avatar)
+        }
+      }
+      
+      // Show success message and redirect
+      alert('Profile updated successfully!')
+      navigate('/dashboard/myprofile')
+      
+    } catch (error) {
+      console.error('Update failed:', error.response?.data || error.message)
+      alert('Failed to update profile. Please try again.')
+    }
+  }
+  return (
+    <form ref={formRef} onSubmit={handleSubmit}>
       {/* TITLE */}
       <h2 className="text-[#6657E2] text-2xl font-semibold mb-1">Edit profile</h2>
       <p className="text-gray-500 mb-8">
-       Manage your personal information and learning preferences.
+        Manage your personal information and learning preferences.
       </p>
 
       <div className="flex gap-8">
@@ -18,22 +97,39 @@ export default function EditProfile() {
         {/* LEFT CARD */}
         <div className="w-74">
           <div className="bg-white h-85 rounded-xl shadow p-6 text-center">
-            <img
-              src={profilePic}
-              className="w-24 h-24 rounded-full mt-5 mx-auto object-cover"
-            />
+            <div className="relative inline-block">
+              <label className="cursor-pointer">
+                <img
+                  src={previewUrl}
+                  className="w-24 h-24 rounded-full mt-5 mx-auto object-cover"
+                  alt="User avatar"
+                />
+                <div className="absolute inset-0 flex items-center justify-center mt-5">
+                  <div className="bg-black bg-opacity-50 rounded-full w-24 h-24 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+                    <FiCamera className="text-white text-xl" />
+                  </div>
+                </div>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                  className="hidden"
+                />
+              </label>
+            </div>
+
 
             <h3 className="mt-4 font-semibold text-gray-900 text-lg">
-              Rokey Mahmud
+              {user.name}
             </h3>
 
             {/* Badge */}
             <span className="px-3 py-1 text-xs text-[#F3934F] bg-[#EBEBEB] rounded-full mt-2 inline-block">
-              Student
+              {user.role}
             </span>
 
             <p className="text-[#7C7C7C] text-xs mt-2">
-              Member since 8/5/2024
+              Member since {new Date(user.createdAt).toLocaleDateString()}
             </p>
           </div>
         </div>
@@ -48,7 +144,8 @@ export default function EditProfile() {
               <label className="block  text-gray-700 text-sm">Name</label>
               <input
                 type="text"
-                defaultValue="Rokey"
+                name="name"
+                defaultValue={user.name}
                 className="w-full rounded-lg bg-white border border-gray-300 px-2 py-3 outline-none text-sm shadow-sm"
               />
             </div>
@@ -58,8 +155,10 @@ export default function EditProfile() {
               <label className="block  text-gray-700 text-sm">Email</label>
               <input
                 type="email"
-                defaultValue="rokey@gmail.com"
-                className="w-full rounded-lg bg-white border border-gray-300 px-2 py-3 outline-none text-sm shadow-sm"
+                name="email"
+                defaultValue={user.email}
+                disabled={true}
+                className="w-full rounded-lg bg-white border text-gray-400 border-gray-300 px-2 py-3 outline-none text-sm shadow-sm"
               />
             </div>
 
@@ -69,43 +168,60 @@ export default function EditProfile() {
 
               <div className="flex gap-3">
 
-                {/* COUNTRY CODE BUTTON */}
-                <button
-                  className="px-4 flex items-center gap-2 rounded-lg text-sm text-white shadow-sm"
+                {/* COUNTRY CODE SELECT */}
+                <select
+                  value={selectedCountryCode}
+                  onChange={(e) => setSelectedCountryCode(e.target.value)}
+                  className="px-4 flex items-center gap-2 text-black rounded-lg  shadow-sm"
                   style={{
                     background: "linear-gradient(90deg, #6657E2, #903CD1)",
                     border: "1px solid rgba(255,255,255,0.4)",
                   }}
                 >
-                  <img
-                    src={logo}
-                    className="w-5 h-5 rounded-sm"
-                  />
-
-                  +1242
-                  <FiChevronDown size={18} />
-                </button>
+                  <option value="+880">🇧🇩 +880</option>
+                  <option value="+1">🇺🇸 +1</option>
+                  <option value="+44">🇬🇧 +44</option>
+                  <option value="+91">🇮🇳 +91</option>
+                  <option value="+1242">🇧🇸 +1242</option>
+                </select>
 
                 {/* PHONE INPUT */}
                 <input
                   type="text"
-                  defaultValue="3000597212"
+                  name="phoneNumber"
+                  defaultValue={user.phoneNumber || ''}
                   className="flex-1 rounded-lg bg-white border border-gray-300 px-2 py-3 outline-none text-sm shadow-sm"
+                  placeholder="Enter phone number"
                 />
               </div>
+            </div>
+
+            {/* Bio */}
+            <div>
+              <label className="block mb-1 text-gray-700 text-sm">Bio</label>
+              <textarea
+                name="bio"
+                defaultValue={user.bio || ''}
+                rows="3"
+                className="w-full rounded-lg bg-white border border-gray-300 px-2 py-3 outline-none text-sm shadow-sm resize-none"
+                placeholder="Tell us about yourself..."
+              />
             </div>
           </div>
 
           {/* EDIT BUTTON */}
           <div className="w-full flex justify-end">
-            <button className="mt-3 bg-gradient-to-r from-[#6657E2] to-[#903CD1] hover:opacity-90 text-white px-6 py-3 rounded-lg flex items-center gap-2 text-sm font-medium shadow-md cursor-pointer">
-              
+        <button
+              type="submit"
+              className="mt-3 bg-gradient-to-r from-[#6657E2] to-[#903CD1] hover:opacity-90 text-white px-6 py-3 rounded-lg flex items-center gap-2 text-sm font-medium shadow-md"
+            >
+
               Save Change
             </button>
           </div>
 
         </div>
       </div>
-    </div>
+    </form>
   );
 }
