@@ -9,7 +9,7 @@ export default function Messages() {
         {
             name: "Rokey Mahmud",
             subject: "English",
-            avatar:logo1,
+            avatar: logo1,
             online: true,
             messages: [
                 {
@@ -50,7 +50,7 @@ export default function Messages() {
     const activeConversation = conversations.find(
         (conv) => conv.name === activeUser
     );
-
+//
     return (
         <div className="">
             {/* Header */}
